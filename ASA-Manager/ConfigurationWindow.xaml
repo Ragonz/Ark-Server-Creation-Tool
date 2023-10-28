@@ -1,0 +1,23 @@
+﻿<Window x:Class="ARKServerCreationTool.ConfigurationWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:ARKServerCreationTool"
+        mc:Ignorable="d"
+        Title="ASCT Configuration" Height="408" Width="586">
+    <Grid>
+        <Label Content="Configuration" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="10,10,0,0" FontSize="16"/>
+        <Label Content="Game Folder" HorizontalAlignment="Left" Margin="10,48,0,0" VerticalAlignment="Top"/>
+        <TextBox x:Name="txt_gameDir" Margin="93,50,113,0" VerticalAlignment="Top" Height="22"/>
+        <Button x:Name="btn_saveConfig" Content="Save Config" Margin="0,17,10,0" Height="20" VerticalAlignment="Top" Click="btn_saveConfig_Click" HorizontalAlignment="Right" Width="117"/>
+        <Label Content="Steam Config - " HorizontalAlignment="Left" VerticalAlignment="Top" Margin="10,113,0,0" FontSize="14"/>
+        <TextBox x:Name="txt_steamUsername" Margin="78,147,10,0" VerticalAlignment="Top" Height="22"/>
+        <TextBox x:Name="txt_steamPassword" Margin="78,174,10,0" VerticalAlignment="Top" Height="22"/>
+        <Label Content="Username" HorizontalAlignment="Left" Margin="10,147,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.326,-0.28"/>
+        <Label Content="Password" HorizontalAlignment="Left" Margin="10,172,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.326,-0.28"/>
+        <CheckBox x:Name="chk_steamAutoLaunch" Content="Automatically Launch Steam Client" HorizontalAlignment="Left" Margin="14,201,0,0" VerticalAlignment="Top" RenderTransformOrigin="-0.029,0.471" Width="218"/>
+        <Button x:Name="btn_gameDirBrowse" Content="Browse" Margin="0,50,10,0" Height="21" VerticalAlignment="Top" Click="btn_gameDirBrowse_Click" HorizontalAlignment="Right" Width="98"/>
+        <Label Content="The Steam account must own ARK: Survival Ascended" HorizontalAlignment="Left" Margin="108,115,0,0" VerticalAlignment="Top" RenderTransformOrigin="-0.28,0.461" Foreground="#FF676666"/>
+    </Grid>
+</Window>

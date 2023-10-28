@@ -1,0 +1,18 @@
+﻿<Window x:Class="ARKServerCreationTool.UpdaterWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:ARKServerCreationTool"
+        mc:Ignorable="d"
+        Title="ASCT Updater" Height="450" Width="800" Closing="Window_Closing">
+    <Grid>
+        <Label Content="Updater" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top" FontSize="16"/>
+        <Button x:Name="btn_runUpdate" Content="Update Game Files" Margin="10,0,0,10" Height="52" VerticalAlignment="Bottom" HorizontalAlignment="Left" Width="160" Click="btn_runUpdate_Click"/>
+        <ScrollViewer x:Name="ConsoleScrollViewer" Margin="10,46,10,67" VerticalScrollBarVisibility="Auto" Background="Black">
+            <TextBlock x:Name="txt_updateConsole" Foreground="White" Width="770" />
+        </ScrollViewer>
+        <Button x:Name="btn_exit" Content="Exit" Margin="604,0,0,10" HorizontalAlignment="Left" Width="186" Height="52" VerticalAlignment="Bottom" Click="btn_exit_Click"/>
+
+    </Grid>
+</Window>
