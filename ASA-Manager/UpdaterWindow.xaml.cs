@@ -69,9 +69,6 @@ namespace ARKServerCreationTool
                 string directoryToUpdate = ((ASCTConfiguration)Application.Current.Properties["globalConfig"]).GameDirectory;
                 ulong serverAppID = ((ASCTConfiguration)Application.Current.Properties["globalConfig"]).serverAppID;
 
-                string username = ((ASCTConfiguration)Application.Current.Properties["globalConfig"]).SteamUsername;
-                string password = ((ASCTConfiguration)Application.Current.Properties["globalConfig"]).SteamPassword;
-
                 AddToConsole($"Updating Game Files in {directoryToUpdate} - {DateTime.Now:HH:mm:ss}");
 
                 if (Directory.Exists("DepotDownloader"))
@@ -102,7 +99,7 @@ namespace ARKServerCreationTool
                 ProcessStartInfo startInfo = new ProcessStartInfo
                 {
                     FileName = depotDownloaderExePath,
-                    Arguments = $"-app {serverAppID} -dir {directoryToUpdate} -username {username} -password {password} -validate",
+                    Arguments = $"-app {serverAppID} -dir {directoryToUpdate} -validate",
                     RedirectStandardOutput = true,
                     CreateNoWindow = true,
                     UseShellExecute = false

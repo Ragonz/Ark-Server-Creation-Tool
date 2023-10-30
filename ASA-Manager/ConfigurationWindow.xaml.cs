@@ -26,18 +26,12 @@ namespace ARKServerCreationTool
 
             txt_gameDir.Text = ((ASCTConfiguration)Application.Current.Properties["globalConfig"]).GameDirectory;
 
-            txt_steamUsername.Text = ((ASCTConfiguration)Application.Current.Properties["globalConfig"]).SteamUsername;
-            txt_steamPassword.Text = ((ASCTConfiguration)Application.Current.Properties["globalConfig"]).SteamPassword;
-
             this.firstLaunch = firstLaunch;
         }
 
         private void btn_saveConfig_Click(object sender, RoutedEventArgs e)
         {
             ((ASCTConfiguration)Application.Current.Properties["globalConfig"]).GameDirectory = txt_gameDir.Text;
-
-            ((ASCTConfiguration)Application.Current.Properties["globalConfig"]).SteamUsername = txt_steamUsername.Text;
-            ((ASCTConfiguration)Application.Current.Properties["globalConfig"]).SteamPassword = txt_steamPassword.Text;
 
             ((ASCTConfiguration)Application.Current.Properties["globalConfig"]).Save();
 

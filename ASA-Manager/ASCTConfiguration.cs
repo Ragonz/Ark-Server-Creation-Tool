@@ -33,8 +33,6 @@ namespace ARKServerCreationTool
         public ushort RConPort = 27017;
         public ushort PeerPort = 27018;
 
-        public string SteamUsername;
-        public string SteamPassword;
         public bool SteamClientAutoLaunch = true;
 
         [JsonIgnore]
