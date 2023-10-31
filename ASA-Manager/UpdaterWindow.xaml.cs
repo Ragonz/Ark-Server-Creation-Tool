@@ -65,6 +65,14 @@ namespace ARKServerCreationTool
         {
             try
             {
+                bool serverWasRunning;
+                if (serverWasRunning = GameProcessManager.IsRunning)
+                {
+                    AddToConsole("Stopping Server...");
+                    GameProcessManager.Stop();
+                    AddToConsole("Server Stoppped");
+                }
+
                 consoleBatchQueue.Clear();
 
                 string depotDownloaderFolder = ((ASCTConfiguration)Application.Current.Properties["globalConfig"]).depotDownloaderFolder;
@@ -119,6 +127,13 @@ namespace ARKServerCreationTool
                // p.BeginOutputReadLine();
                 p.WaitForExit();
 
+                if (serverWasRunning)
+                {
+                    AddToConsole("Starting server");
+                    GameProcessManager.Start();
+                    AddToConsole("Done");
+                }
+
             }
             catch (Exception e)
             {
@@ -143,25 +158,11 @@ namespace ARKServerCreationTool
 
         private void AddToConsole(string message)
         {
-            bool sendConsoleQueueToView = false;
-
-            sendConsoleQueueToView = (!timer.IsRunning || timer.ElapsedMilliseconds >= 1000);
-
-            consoleBatchQueue.Add(message);
-
-            if (sendConsoleQueueToView)
+            Dispatcher.Invoke(() =>
             {
-                for (int i = 0; i < consoleBatchQueue.Count; i++)
-                {
-                    Dispatcher.Invoke(() =>
-                    {
-                        txt_updateConsole.Text += string.Join(Environment.NewLine, consoleBatchQueue);
-                        ConsoleScrollViewer.ScrollToBottom();
-                    });
-                    timer.Restart();
-                    consoleBatchQueue.Clear();
-                }
-            }
+                txt_updateConsole.Text += message + Environment.NewLine;
+                ConsoleScrollViewer.ScrollToBottom();
+            });
         }
 
         bool alreadyReturning = false;
