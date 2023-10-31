@@ -70,7 +70,7 @@ namespace ARKServerCreationTool
 
                     success = gameProcess.Start();
 
-                    if (((ASCTConfiguration)Application.Current.Properties["globalConfig"]).AutomaticallyCreateFirewallRule && !FirewallManager.Instance.Rules.Any(rule => rule.ApplicationName.Equals(((ASCTConfiguration)Application.Current.Properties["globalConfig"]).ExecutablePath, StringComparison.OrdinalIgnoreCase)))
+                    if (((ASCTConfiguration)Application.Current.Properties["globalConfig"]).AutomaticallyCreateFirewallRule && !FirewallManager.Instance.Rules.Any(rule => rule.ApplicationName != null && rule.ApplicationName.Equals(((ASCTConfiguration)Application.Current.Properties["globalConfig"]).ExecutablePath, StringComparison.OrdinalIgnoreCase)))
                     {
                         try
                         {
@@ -94,8 +94,9 @@ namespace ARKServerCreationTool
 
                 return success;
             }
-            catch (Exception)
+            catch (Exception e)
             {
+                MessageBox.Show(e.Message + Environment.NewLine + e.StackTrace);
                 return false;
             }            
         }
