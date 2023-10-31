@@ -27,12 +27,32 @@ namespace ARKServerCreationTool
         public ulong serverAppID = 2430930;
         [JsonIgnore]
         public const ushort defaultGamePort = 7777;
+        [JsonIgnore]
+        public const string multihomeArgument = @"?MultiHome=";
 
         public string GameDirectory = Path.Combine(Directory.GetCurrentDirectory(), "ARK_SA");
 
         public ushort? overrideGamePort = null;
 
-        public string overrideIPAddress = string.Empty;
+        public bool UseMultihome = false;
+        public string IPAddress = GetLocalIPAddress();
+
+        [JsonIgnore]
+        public string Multihome
+        {
+            get
+            {
+                if (UseMultihome)
+                {
+                    return multihomeArgument + IPAddress;
+                }
+
+                else
+                {
+                    return string.Empty;
+                }
+            }
+        }
 
         [JsonIgnore]
         public ushort GamePort
@@ -51,25 +71,26 @@ namespace ARKServerCreationTool
         }
 
         [JsonIgnore]
-        public string IPAddress
+        public string ExecutablePath { get { return Path.Combine(GameDirectory, relativeEXEPath); } }
+
+        public bool useCustomLaunchArgs = false;
+        public string customLaunchArgs = string.Empty;
+        [JsonIgnore]
+        public string LaunchArguments
         {
             get
             {
-                if (overrideIPAddress != string.Empty)
+                if(useCustomLaunchArgs)
                 {
-                    return overrideIPAddress;
+                    return customLaunchArgs;
                 }
                 else
                 {
-                    return GetLocalIPAddress();
+                    return $"\"TheIsland_WP{Multihome}\" -port={GamePort}";
                 }
             }
         }
 
-        [JsonIgnore]
-        public string ExecutablePath { get { return Path.Combine(GameDirectory, relativeEXEPath); } }
-        [JsonIgnore]
-        public string LaunchArguments { get { return $"\"TheIsland_WP?MultiHome={GetLocalIPAddress()}\" -port={GamePort}"; } }
 
         public void Save()
         {

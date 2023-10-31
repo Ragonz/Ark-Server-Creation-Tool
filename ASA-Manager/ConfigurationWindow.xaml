@@ -12,10 +12,17 @@
         <TextBox x:Name="txt_gameDir" Margin="93,50,113,0" VerticalAlignment="Top" Height="21"/>
         <Button x:Name="btn_saveConfig" Content="Save Config" Margin="0,17,10,0" Height="20" VerticalAlignment="Top" Click="btn_saveConfig_Click" HorizontalAlignment="Right" Width="117"/>
         <Button x:Name="btn_gameDirBrowse" Content="Browse" Margin="0,50,10,0" Height="21" VerticalAlignment="Top" Click="btn_gameDirBrowse_Click" HorizontalAlignment="Right" Width="98"/>
-        <Label Content="Game Port" HorizontalAlignment="Left" Margin="10,133,0,0" VerticalAlignment="Top"/>
-        <TextBox x:Name="txt_Game_Port" Margin="81,135,0,0" VerticalAlignment="Top" Height="21" HorizontalAlignment="Left" Width="90" PreviewTextInput="NumberValidationTextBox"/>
+        <Label Content="Game Port" HorizontalAlignment="Left" Margin="51,177,0,0" VerticalAlignment="Top"/>
+        <TextBox x:Name="txt_Game_Port" Margin="125,179,0,0" VerticalAlignment="Top" Height="21" HorizontalAlignment="Left" Width="90" PreviewTextInput="NumberValidationTextBox" MaxLength="5"/>
         <Label Content="Game Server Launch Settings - " HorizontalAlignment="Left" VerticalAlignment="Top" Margin="10,99,0,0" FontSize="14"/>
         <Label Content="Settings used to launch the ARK: SA server" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="202,101,0,0" Foreground="#FF6D6D6D"/>
-        <Label Content="Leave blank for default port 7777" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="176,133,0,0" Foreground="#FF6D6D6D"/>
+        <Label Content="Leave blank for default port 7777" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="220,177,0,0" Foreground="#FF6D6D6D"/>
+        <Label Content="IP Address" HorizontalAlignment="Left" Margin="55,226,0,0" VerticalAlignment="Top"/>
+        <TextBox x:Name="txt_IPAddress" Margin="126,228,0,0" VerticalAlignment="Top" Height="21" HorizontalAlignment="Left" Width="132" PreviewTextInput="NumberValidationTextBox" MaxLength="5"/>
+        <CheckBox x:Name="chk_useMultihome" Content="Use specific IP address" HorizontalAlignment="Left" Margin="126,208,0,0" VerticalAlignment="Top"/>
+        <CheckBox x:Name="chk_overrideLaunchArgs" Content="Override Launch Arguments" HorizontalAlignment="Left" Margin="126,133,0,0" VerticalAlignment="Top"/>
+        <Label Content="Launch Arguments" HorizontalAlignment="Left" Margin="11,151,0,0" VerticalAlignment="Top"/>
+        <TextBox x:Name="txt_customLaunchArgs" Margin="125,153,26,0" VerticalAlignment="Top" Height="21" PreviewTextInput="NumberValidationTextBox" MaxLength="5"/>
+        <Label Content="" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="299,128,0,0" Foreground="#FF6D6D6D"/>
     </Grid>
 </Window>
