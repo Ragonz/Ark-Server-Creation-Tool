@@ -17,6 +17,7 @@ using System.IO;
 using System.IO.Compression;
 using System.Diagnostics;
 using System.Printing;
+using System.Text.RegularExpressions;
 
 namespace ARKServerCreationTool
 {
@@ -58,10 +59,14 @@ namespace ARKServerCreationTool
             return updateTask != null && updateTask.Status == TaskStatus.Running;
         }
 
+        List<string> consoleBatchQueue = new List<string>();
+
         private void Update()
         {
             try
             {
+                consoleBatchQueue.Clear();
+
                 string depotDownloaderFolder = ((ASCTConfiguration)Application.Current.Properties["globalConfig"]).depotDownloaderFolder;
                 string depotDownloaderURL = ((ASCTConfiguration)Application.Current.Properties["globalConfig"]).depotDownloaderURL;
                 string depotDownloaderExe = ((ASCTConfiguration)Application.Current.Properties["globalConfig"]).depotDownloaderExe;
@@ -100,8 +105,8 @@ namespace ARKServerCreationTool
                 {
                     FileName = depotDownloaderExePath,
                     Arguments = $"-app {serverAppID} -dir {directoryToUpdate} -validate",
-                    RedirectStandardOutput = true,
-                    CreateNoWindow = true,
+                    RedirectStandardOutput = false,
+                    CreateNoWindow = false,
                     UseShellExecute = false
                 };
 
@@ -111,7 +116,7 @@ namespace ARKServerCreationTool
                 p.OutputDataReceived += (s, e) => { AddToConsole(e.Data); };
 
                 p.Start();
-                p.BeginOutputReadLine();
+               // p.BeginOutputReadLine();
                 p.WaitForExit();
 
             }
@@ -134,15 +139,29 @@ namespace ARKServerCreationTool
         
         private delegate void AddToConsoleCallBack(string message);
 
+        Stopwatch timer = new Stopwatch();
+
         private void AddToConsole(string message)
         {
-            //this.Dispatcher.Invoke(new AddToConsoleCallBack(this.AddToConsole), new object[] { message });
+            bool sendConsoleQueueToView = false;
 
-            this.Dispatcher.Invoke(() =>
+            sendConsoleQueueToView = (!timer.IsRunning || timer.ElapsedMilliseconds >= 1000);
+
+            consoleBatchQueue.Add(message);
+
+            if (sendConsoleQueueToView)
             {
-                txt_updateConsole.Text += message + Environment.NewLine;
-                ConsoleScrollViewer.ScrollToBottom();
-            });
+                for (int i = 0; i < consoleBatchQueue.Count; i++)
+                {
+                    Dispatcher.Invoke(() =>
+                    {
+                        txt_updateConsole.Text += string.Join(Environment.NewLine, consoleBatchQueue);
+                        ConsoleScrollViewer.ScrollToBottom();
+                    });
+                    timer.Restart();
+                    consoleBatchQueue.Clear();
+                }
+            }
         }
 
         bool alreadyReturning = false;

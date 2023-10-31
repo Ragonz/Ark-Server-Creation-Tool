@@ -22,42 +22,45 @@ namespace ARKServerCreationTool
     /// </summary>
     public partial class MainWindow : Window
     {
+        enum RunButtonStatus
+        {
+            Unknown, Run, Stop
+        }
+
+        RunButtonStatus buttonStatus = RunButtonStatus.Unknown;
+
         public MainWindow()
         {
             InitializeComponent();
 
-            txt_Executable.Text = ((ASCTConfiguration)Application.Current.Properties["globalConfig"]).ExecutablePath;
-            txt_Arguments.Text = ((ASCTConfiguration)Application.Current.Properties["globalConfig"]).LaunchArguments;
+            SetButtonStatus();
         }
 
         private void Button_Click(object sender, RoutedEventArgs e)
         {
-            try
+            if (buttonStatus == RunButtonStatus.Run)
             {
-                ProcessStartInfo startInfo = new ProcessStartInfo
-                {
-                    FileName = txt_Executable.Text,
-                    Arguments = txt_Arguments.Text,
-                    WorkingDirectory = ((ASCTConfiguration)Application.Current.Properties["globalConfig"]).GameDirectory,
-                    RedirectStandardOutput = chk_stdout.IsChecked.Value,
-                    RedirectStandardInput = chk_stdin.IsChecked.Value,
-                    RedirectStandardError = chk_stderr.IsChecked.Value,
-                    UseShellExecute = false
-                };
-
-                Process p = new Process();
-                p.StartInfo = startInfo;
-
-                p.Start();
-                p.WaitForExit();
-
-                if (chk_stdout.IsChecked.Value) File.WriteAllText("OUT.txt", p.StandardOutput.ReadToEnd());
-                if (chk_stderr.IsChecked.Value) File.WriteAllText("ERR.txt", p.StandardError.ReadToEnd());
+                GameProcessManager.Start();
             }
-            catch (Exception ex)
+            else if (buttonStatus == RunButtonStatus.Stop)
             {
-                MessageBox.Show(ex.Message + Environment.NewLine + ex.StackTrace);
-                throw;
+                GameProcessManager.Stop();
+            }
+
+            SetButtonStatus();
+        }
+
+        private void SetButtonStatus()
+        {
+            if (GameProcessManager.IsRunning)
+            {
+                buttonStatus = RunButtonStatus.Stop;
+                btn_run.Content = "Stop Server";
+            }
+            else
+            {
+                buttonStatus = RunButtonStatus.Run;
+                btn_run.Content = "Start Server";
             }
         }
 
@@ -93,6 +96,11 @@ namespace ARKServerCreationTool
                 desiredWindow = new UpdaterWindow();
                 desiredWindow.Show();
             }
+        }
+
+        private void Window_Activated(object sender, EventArgs e)
+        {
+            SetButtonStatus();
         }
     }
 }

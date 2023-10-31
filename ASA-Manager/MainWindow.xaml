@@ -5,16 +5,9 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:ARKServerCreationTool"
         mc:Ignorable="d"
-        Title="MainWindow" Height="450" Width="800">
+        Title="MainWindow" Height="450" Width="800" Activated="Window_Activated">
     <Grid>
-        <TextBox x:Name="txt_Executable" HorizontalAlignment="Left" Margin="82,47,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="708"/>
-        <Label Content="Executable" HorizontalAlignment="Left" Margin="10,43,0,0" VerticalAlignment="Top"/>
-        <TextBox x:Name="txt_Arguments" HorizontalAlignment="Left" Margin="82,78,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="708"/>
-        <Label Content="Arguments" HorizontalAlignment="Left" Margin="10,74,0,0" VerticalAlignment="Top"/>
-        <Button x:Name="btn_run" Content="RUN" HorizontalAlignment="Left" Margin="541,146,0,0" VerticalAlignment="Top" Height="71" Width="208" Click="Button_Click"/>
-        <CheckBox x:Name="chk_stdout" Content="Redirect STDOUT" HorizontalAlignment="Left" Margin="82,162,0,0" VerticalAlignment="Top"/>
-        <CheckBox x:Name="chk_stderr" Content="Redirect STDERR" HorizontalAlignment="Left" Margin="82,182,0,0" VerticalAlignment="Top"/>
-        <CheckBox x:Name="chk_stdin" Content="Redirect STDIN" HorizontalAlignment="Left" Margin="82,202,0,0" VerticalAlignment="Top"/>
+        <Button x:Name="btn_run" Content="RUN" HorizontalAlignment="Center" Margin="0,146,0,0" VerticalAlignment="Top" Height="71" Width="208" Click="Button_Click"/>
         <Button x:Name="btn_openUpdater" Content="Open Updater" HorizontalAlignment="Left" Margin="187,10,0,0" VerticalAlignment="Top" Height="28" Width="185" Click="btn_openUpdater_Click"/>
         <Button x:Name="btn_openConfig" Content="Open Configuration" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top" Height="28" Width="172" Click="btn_openConfig_Click"/>
 
