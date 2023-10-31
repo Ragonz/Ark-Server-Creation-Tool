@@ -24,5 +24,6 @@
         <Label Content="Launch Arguments" HorizontalAlignment="Left" Margin="11,151,0,0" VerticalAlignment="Top"/>
         <TextBox x:Name="txt_customLaunchArgs" Margin="125,153,26,0" VerticalAlignment="Top" Height="21" />
         <Label Content="" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="299,128,0,0" Foreground="#FF6D6D6D"/>
+        <CheckBox x:Name="chk_autoFirewallRules" Content="Automatically create firewall rule" HorizontalAlignment="Left" Margin="93,76,0,0" VerticalAlignment="Top"/>
     </Grid>
 </Window>

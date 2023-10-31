@@ -32,6 +32,8 @@ namespace ARKServerCreationTool
 
         public string GameDirectory = Path.Combine(Directory.GetCurrentDirectory(), "ARK_SA");
 
+        public bool AutomaticallyCreateFirewallRule = true;
+
         public ushort? overrideGamePort = null;
 
         public bool UseMultihome = false;

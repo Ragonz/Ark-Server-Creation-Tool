@@ -31,6 +31,7 @@ namespace ARKServerCreationTool
             txt_Game_Port.Text = ((ASCTConfiguration)Application.Current.Properties["globalConfig"]).overrideGamePort == null ? string.Empty : ((ASCTConfiguration)Application.Current.Properties["globalConfig"]).overrideGamePort.Value.ToString();
             chk_useMultihome.IsChecked = ((ASCTConfiguration)Application.Current.Properties["globalConfig"]).UseMultihome;
             txt_IPAddress.Text = ((ASCTConfiguration)Application.Current.Properties["globalConfig"]).IPAddress;
+            chk_autoFirewallRules.IsChecked = ((ASCTConfiguration)Application.Current.Properties["globalConfig"]).AutomaticallyCreateFirewallRule;
 
             this.firstLaunch = firstLaunch;
         }
@@ -43,6 +44,7 @@ namespace ARKServerCreationTool
             ((ASCTConfiguration)Application.Current.Properties["globalConfig"]).overrideGamePort = txt_Game_Port.Text.Trim() == string.Empty ? null : ushort.Parse(txt_Game_Port.Text.Trim());
             ((ASCTConfiguration)Application.Current.Properties["globalConfig"]).UseMultihome = chk_useMultihome.IsChecked.Value;
             ((ASCTConfiguration)Application.Current.Properties["globalConfig"]).IPAddress = txt_IPAddress.Text;
+            ((ASCTConfiguration)Application.Current.Properties["globalConfig"]).AutomaticallyCreateFirewallRule = chk_autoFirewallRules.IsChecked.Value;
 
             ((ASCTConfiguration)Application.Current.Properties["globalConfig"]).Save();
 

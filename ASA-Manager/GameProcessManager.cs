@@ -6,6 +6,7 @@ using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
 using System.Windows;
+using WindowsFirewallHelper;
 
 namespace ARKServerCreationTool
 {
@@ -68,6 +69,27 @@ namespace ARKServerCreationTool
                     gameProcess.StartInfo = si;
 
                     success = gameProcess.Start();
+
+                    if (((ASCTConfiguration)Application.Current.Properties["globalConfig"]).AutomaticallyCreateFirewallRule && !FirewallManager.Instance.Rules.Any(rule => rule.ApplicationName.Equals(((ASCTConfiguration)Application.Current.Properties["globalConfig"]).ExecutablePath, StringComparison.OrdinalIgnoreCase)))
+                    {
+                        try
+                        {
+                            var rule = FirewallManager.Instance.CreateApplicationRule(
+                                @"Rule for ARK SA (Created by ASCT)",
+                                FirewallAction.Allow,
+                                ((ASCTConfiguration)Application.Current.Properties["globalConfig"]).ExecutablePath
+                            );
+                            rule.Direction = FirewallDirection.Inbound;
+                            FirewallManager.Instance.Rules.Add(rule);
+
+                            MessageBox.Show("No existing Firewll Rule was detected, a new one was created.");
+                        }
+                        catch (Exception)
+                        {
+                            MessageBox.Show($"ASCT was unable to create the firewall rule. \n" +
+                                $"You may be unable to connect to the service remotely ", "Error creating Firewall Rule");
+                        }
+                    }
                 }
 
                 return success;
@@ -77,6 +99,7 @@ namespace ARKServerCreationTool
                 return false;
             }            
         }
+
 
         public static bool Stop()
         {
