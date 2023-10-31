@@ -11,7 +11,6 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
-using System.Windows.Shapes;
 using System.Diagnostics;
 using System.IO;
 
@@ -101,6 +100,11 @@ namespace ARKServerCreationTool
         private void Window_Activated(object sender, EventArgs e)
         {
             SetButtonStatus();
+        }
+
+        private void btn_openConfigFolder_Click(object sender, RoutedEventArgs e)
+        {
+            Process.Start("notepad.exe", Path.Combine(((ASCTConfiguration)Application.Current.Properties["globalConfig"]).GameDirectory, @"ShooterGame\Saved\Config\WindowsServer\GameUserSettings.ini")).WaitForExit();
         }
     }
 }
