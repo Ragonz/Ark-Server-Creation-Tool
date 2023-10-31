@@ -25,20 +25,51 @@ namespace ARKServerCreationTool
         public  string depotDownloaderExe = "DepotDownloader.exe";
         [JsonIgnore]
         public ulong serverAppID = 2430930;
+        [JsonIgnore]
+        public const ushort defaultGamePort = 7777;
 
         public string GameDirectory = Path.Combine(Directory.GetCurrentDirectory(), "ARK_SA");
 
-        public ushort GamePort = 27015;
-        public ushort QueryPort = 27016;
-        public ushort RConPort = 27017;
-        public ushort PeerPort = 27018;
+        public ushort? overrideGamePort = null;
 
-        public bool SteamClientAutoLaunch = true;
+        public string overrideIPAddress = string.Empty;
+
+        [JsonIgnore]
+        public ushort GamePort
+        {
+            get
+            {
+                if (overrideGamePort != null)
+                {
+                    return overrideGamePort.Value;
+                }
+                else
+                {
+                    return defaultGamePort;
+                }
+            }
+        }
+
+        [JsonIgnore]
+        public string IPAddress
+        {
+            get
+            {
+                if (overrideIPAddress != string.Empty)
+                {
+                    return overrideIPAddress;
+                }
+                else
+                {
+                    return GetLocalIPAddress();
+                }
+            }
+        }
 
         [JsonIgnore]
         public string ExecutablePath { get { return Path.Combine(GameDirectory, relativeEXEPath); } }
         [JsonIgnore]
-        public string LaunchArguments { get { return $"\"TheIsland_WP?MultiHome={GetLocalIPAddress()}?QueryPort={QueryPort}?RCONEnabled=True?RCONServerGameLogBuffer=600?RCONPort={RConPort}?MaxPlayers=47?listen\" -port={GamePort} -PeerPort={PeerPort} -game -server -log -servergamelog -ForceAllowCaveFlyers -newsaveformat -usestore"; } }
+        public string LaunchArguments { get { return $"\"TheIsland_WP?MultiHome={GetLocalIPAddress()}\" -port={GamePort}"; } }
 
         public void Save()
         {

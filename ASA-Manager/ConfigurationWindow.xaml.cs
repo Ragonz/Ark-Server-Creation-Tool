@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
@@ -57,6 +58,20 @@ namespace ARKServerCreationTool
                     txt_gameDir.Text = dialog.SelectedPath;
                 }
             }
+        }
+
+        private void NumberValidationTextBox(object sender, TextCompositionEventArgs e)
+        {
+            //Regex regex = new Regex("[0-9]+");
+
+            //if (double.TryParse(((System.Windows.Controls.TextBox)sender).Text + e.Text, out double value))
+            //{
+            //    Math.Clamp()
+            //}
+
+            //bool isUShort = ushort.TryParse(((System.Windows.Controls.TextBox)sender).Text + e.Text, out ushort _);
+            //bool isNumber = double.TryParse(((System.Windows.Controls.TextBox)sender).Text + e.Text, out double value);
+            //e.Handled = !regex.IsMatch(e.Text) || !isUShort;
         }
     }
 }

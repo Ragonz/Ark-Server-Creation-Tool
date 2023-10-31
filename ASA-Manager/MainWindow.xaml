@@ -7,18 +7,16 @@
         mc:Ignorable="d"
         Title="MainWindow" Height="450" Width="800">
     <Grid>
-        <TextBox HorizontalAlignment="Left" Margin="82,14,0,0" TextWrapping="Wrap" Text="TextBox" VerticalAlignment="Top" Width="241"/>
-        <Label Content="Executable" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top"/>
-        <TextBox x:Name="txt_Executable" HorizontalAlignment="Left" Margin="82,14,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="708"/>
-        <Label Content="Executable" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top"/>
-        <TextBox x:Name="txt_Arguments" HorizontalAlignment="Left" Margin="82,45,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="708"/>
-        <Label Content="Arguments" HorizontalAlignment="Left" Margin="10,41,0,0" VerticalAlignment="Top"/>
-        <Button x:Name="btn_run" Content="RUN" HorizontalAlignment="Left" Margin="582,199,0,0" VerticalAlignment="Top" Height="71" Width="208" Click="Button_Click"/>
-        <CheckBox x:Name="chk_stdout" Content="Redirect STDOUT" HorizontalAlignment="Left" Margin="82,129,0,0" VerticalAlignment="Top"/>
-        <CheckBox x:Name="chk_stderr" Content="Redirect STDERR" HorizontalAlignment="Left" Margin="82,149,0,0" VerticalAlignment="Top"/>
-        <CheckBox x:Name="chk_stdin" Content="Redirect STDIN" HorizontalAlignment="Left" Margin="82,169,0,0" VerticalAlignment="Top"/>
-        <Button x:Name="btn_openUpdater" Content="Open Updater" HorizontalAlignment="Left" Margin="392,199,0,0" VerticalAlignment="Top" Height="71" Width="185" Click="btn_openUpdater_Click"/>
-        <Button x:Name="btn_openConfig" Content="Open Configuration" HorizontalAlignment="Left" Margin="202,199,0,0" VerticalAlignment="Top" Height="71" Width="185" Click="btn_openConfig_Click"/>
+        <TextBox x:Name="txt_Executable" HorizontalAlignment="Left" Margin="82,47,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="708"/>
+        <Label Content="Executable" HorizontalAlignment="Left" Margin="10,43,0,0" VerticalAlignment="Top"/>
+        <TextBox x:Name="txt_Arguments" HorizontalAlignment="Left" Margin="82,78,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="708"/>
+        <Label Content="Arguments" HorizontalAlignment="Left" Margin="10,74,0,0" VerticalAlignment="Top"/>
+        <Button x:Name="btn_run" Content="RUN" HorizontalAlignment="Left" Margin="541,146,0,0" VerticalAlignment="Top" Height="71" Width="208" Click="Button_Click"/>
+        <CheckBox x:Name="chk_stdout" Content="Redirect STDOUT" HorizontalAlignment="Left" Margin="82,162,0,0" VerticalAlignment="Top"/>
+        <CheckBox x:Name="chk_stderr" Content="Redirect STDERR" HorizontalAlignment="Left" Margin="82,182,0,0" VerticalAlignment="Top"/>
+        <CheckBox x:Name="chk_stdin" Content="Redirect STDIN" HorizontalAlignment="Left" Margin="82,202,0,0" VerticalAlignment="Top"/>
+        <Button x:Name="btn_openUpdater" Content="Open Updater" HorizontalAlignment="Left" Margin="187,10,0,0" VerticalAlignment="Top" Height="28" Width="185" Click="btn_openUpdater_Click"/>
+        <Button x:Name="btn_openConfig" Content="Open Configuration" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top" Height="28" Width="172" Click="btn_openConfig_Click"/>
 
     </Grid>
 </Window>
