@@ -13,6 +13,7 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Diagnostics;
 using System.IO;
+using System.Windows.Threading;
 
 namespace ARKServerCreationTool
 {
@@ -27,6 +28,7 @@ namespace ARKServerCreationTool
         }
 
         RunButtonStatus buttonStatus = RunButtonStatus.Unknown;
+
 
         public MainWindow()
         {

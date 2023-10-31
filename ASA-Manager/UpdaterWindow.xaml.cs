@@ -109,6 +109,8 @@ namespace ARKServerCreationTool
                     ExitUpdateMessage($"ERROR: Could not locate{depotDownloaderExe} - Update aborted");
                 }
 
+                AddToConsole("Lauching Updater");
+
                 ProcessStartInfo startInfo = new ProcessStartInfo
                 {
                     FileName = depotDownloaderExePath,

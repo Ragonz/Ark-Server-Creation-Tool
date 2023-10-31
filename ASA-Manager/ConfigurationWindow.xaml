@@ -22,7 +22,7 @@
         <CheckBox x:Name="chk_useMultihome" Content="Use specific IP address" HorizontalAlignment="Left" Margin="126,208,0,0" VerticalAlignment="Top"/>
         <CheckBox x:Name="chk_overrideLaunchArgs" Content="Override Launch Arguments" HorizontalAlignment="Left" Margin="126,133,0,0" VerticalAlignment="Top"/>
         <Label Content="Launch Arguments" HorizontalAlignment="Left" Margin="11,151,0,0" VerticalAlignment="Top"/>
-        <TextBox x:Name="txt_customLaunchArgs" Margin="125,153,26,0" VerticalAlignment="Top" Height="21" PreviewTextInput="NumberValidationTextBox" MaxLength="5"/>
+        <TextBox x:Name="txt_customLaunchArgs" Margin="125,153,26,0" VerticalAlignment="Top" Height="21" />
         <Label Content="" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="299,128,0,0" Foreground="#FF6D6D6D"/>
     </Grid>
 </Window>
