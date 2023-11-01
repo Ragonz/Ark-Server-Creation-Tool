@@ -106,7 +106,26 @@ namespace ARKServerCreationTool
 
         private void btn_openConfigFolder_Click(object sender, RoutedEventArgs e)
         {
-            Process.Start("notepad.exe", Path.Combine(((ASCTConfiguration)Application.Current.Properties["globalConfig"]).GameDirectory, @"ShooterGame\Saved\Config\WindowsServer\GameUserSettings.ini")).WaitForExit();
+            string GUSConfigPath = Path.Combine(((ASCTConfiguration)Application.Current.Properties["globalConfig"]).GameDirectory, @"ShooterGame\Saved\Config\WindowsServer\GameUserSettings.ini");
+
+            if (File.Exists(GUSConfigPath))
+            {
+                Process.Start("notepad.exe", GUSConfigPath).WaitForExit();
+            }
+            else
+            {
+                string message = "No config file currently exists. Would you like to create one from the template?";
+                string caption = "Missing Config";
+                MessageBoxResult result = MessageBox.Show(message, caption,
+                              MessageBoxButton.YesNo );
+
+                if (result == MessageBoxResult.Yes)
+                {
+                    Directory.CreateDirectory(Path.GetDirectoryName(GUSConfigPath));
+                    File.WriteAllText(GUSConfigPath, Properties.Resources.GUSConfigTemplate);
+                    Process.Start("notepad.exe", GUSConfigPath).WaitForExit();
+                }
+            }
         }
     }
 }

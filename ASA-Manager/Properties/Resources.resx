@@ -1,0 +1,437 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+  <!-- 
+    Microsoft ResX Schema 
+    
+    Version 2.0
+    
+    The primary goals of this format is to allow a simple XML format 
+    that is mostly human readable. The generation and parsing of the 
+    various data types are done through the TypeConverter classes 
+    associated with the data types.
+    
+    Example:
+    
+    ... ado.net/XML headers & schema ...
+    <resheader name="resmimetype">text/microsoft-resx</resheader>
+    <resheader name="version">2.0</resheader>
+    <resheader name="reader">System.Resources.ResXResourceReader, System.Windows.Forms, ...</resheader>
+    <resheader name="writer">System.Resources.ResXResourceWriter, System.Windows.Forms, ...</resheader>
+    <data name="Name1"><value>this is my long string</value><comment>this is a comment</comment></data>
+    <data name="Color1" type="System.Drawing.Color, System.Drawing">Blue</data>
+    <data name="Bitmap1" mimetype="application/x-microsoft.net.object.binary.base64">
+        <value>[base64 mime encoded serialized .NET Framework object]</value>
+    </data>
+    <data name="Icon1" type="System.Drawing.Icon, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+        <value>[base64 mime encoded string representing a byte array form of the .NET Framework object]</value>
+        <comment>This is a comment</comment>
+    </data>
+                
+    There are any number of "resheader" rows that contain simple 
+    name/value pairs.
+    
+    Each data row contains a name, and value. The row also contains a 
+    type or mimetype. Type corresponds to a .NET class that support 
+    text/value conversion through the TypeConverter architecture. 
+    Classes that don't support this are serialized and stored with the 
+    mimetype set.
+    
+    The mimetype is used for serialized objects, and tells the 
+    ResXResourceReader how to depersist the object. This is currently not 
+    extensible. For a given mimetype the value must be set accordingly:
+    
+    Note - application/x-microsoft.net.object.binary.base64 is the format 
+    that the ResXResourceWriter will generate, however the reader can 
+    read any of the formats listed below.
+    
+    mimetype: application/x-microsoft.net.object.binary.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Binary.BinaryFormatter
+            : and then encoded with base64 encoding.
+    
+    mimetype: application/x-microsoft.net.object.soap.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Soap.SoapFormatter
+            : and then encoded with base64 encoding.
+
+    mimetype: application/x-microsoft.net.object.bytearray.base64
+    value   : The object must be serialized into a byte array 
+            : using a System.ComponentModel.TypeConverter
+            : and then encoded with base64 encoding.
+    -->
+  <xsd:schema id="root" xmlns="" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
+    <xsd:import namespace="http://www.w3.org/XML/1998/namespace" />
+    <xsd:element name="root" msdata:IsDataSet="true">
+      <xsd:complexType>
+        <xsd:choice maxOccurs="unbounded">
+          <xsd:element name="metadata">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" />
+              </xsd:sequence>
+              <xsd:attribute name="name" use="required" type="xsd:string" />
+              <xsd:attribute name="type" type="xsd:string" />
+              <xsd:attribute name="mimetype" type="xsd:string" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="assembly">
+            <xsd:complexType>
+              <xsd:attribute name="alias" type="xsd:string" />
+              <xsd:attribute name="name" type="xsd:string" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="data">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+                <xsd:element name="comment" type="xsd:string" minOccurs="0" msdata:Ordinal="2" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" msdata:Ordinal="1" />
+              <xsd:attribute name="type" type="xsd:string" msdata:Ordinal="3" />
+              <xsd:attribute name="mimetype" type="xsd:string" msdata:Ordinal="4" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="resheader">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" />
+            </xsd:complexType>
+          </xsd:element>
+        </xsd:choice>
+      </xsd:complexType>
+    </xsd:element>
+  </xsd:schema>
+  <resheader name="resmimetype">
+    <value>text/microsoft-resx</value>
+  </resheader>
+  <resheader name="version">
+    <value>2.0</value>
+  </resheader>
+  <resheader name="reader">
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <resheader name="writer">
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <data name="GUSConfigTemplate" xml:space="preserve">
+    <value>[ScalabilityGroups]
+sg.ResolutionQuality=75
+sg.ViewDistanceQuality=1
+sg.AntiAliasingQuality=1
+sg.ShadowQuality=2
+sg.GlobalIlluminationQuality=3
+sg.ReflectionQuality=3
+sg.PostProcessQuality=1
+sg.TextureQuality=2
+sg.EffectsQuality=1
+sg.FoliageQuality=2
+sg.ShadingQuality=3
+
+[/Script/ShooterGame.ShooterGameUserSettings]
+AdvancedGraphicsQuality=1
+MasterAudioVolume=1.000000
+MusicAudioVolume=0.800000
+SFXAudioVolume=1.000000
+VoiceAudioVolume=1.000000
+SoundUIAudioVolume=1.000000
+CharacterAudioVolume=1.000000
+StructureTooltipMaxSpeedMultiply=0.000000
+UIScaling=1.000000
+UIQuickbarScaling=0.750000
+CameraShakeScale=0.650000
+bFirstPersonRiding=False
+bThirdPersonPlayer=True
+bShowStatusNotificationMessages=True
+TrueSkyQuality=0.270000
+FOVMultiplier=1.000000
+GroundClutterDensity=1.000000
+bFilmGrain=False
+bMotionBlur=True
+bUseGamepadSpeaker=True
+bUseDFAO=False
+bUseSSAO=True
+bShowChatBox=True
+bCameraViewBob=True
+bInvertLookY=False
+bFloatingNames=True
+bChatBubbles=True
+bHideServerInfo=False
+bJoinNotifications=False
+bDisableNameYourTamePopup=False
+MinimalFloatingNameSetting=False
+bCraftablesShowAllItems=False
+bLocalInventoryItemsShowAllItems=False
+bLocalInventoryCraftingShowAllItems=True
+bRemoteInventoryItemsShowAllItems=False
+bRemoteInventoryCraftingShowAllItems=False
+bRemoteInventoryShowEngrams=True
+bEnableLowLightEnhancement=True
+bEnableFluidInteraction=True
+bDisableHLOD=False
+LookLeftRightSensitivity=1.000000
+LookUpDownSensitivity=1.000000
+TPVCameraHorizontalOffsetFactor=0.000000
+GraphicsQuality=1
+ActiveLingeringWorldTiles=10
+ClientNetQuality=3
+TheGammaCorrection=0.500000
+LastServerSearchType=0
+LastServerSort=2
+LastPVESearchType=-1
+LastDLCTypeSearchType=-1
+LastServerSortAsc=True
+LastAutoFavorite=True
+LastServerSearchHideFull=False
+LastServerSearchProtected=False
+LastPlatformSpecificServerSearch=False
+HideItemTextOverlay=True
+bForceShowItemNames=False
+bDistanceFieldShadowing=True
+bDisableShadows=False
+LODScalar=1.000000
+bToggleToTalk=False
+HighQualityMaterials=True
+HighQualitySurfaces=True
+bTemperatureF=False
+bDisableTorporEffect=False
+bChatShowSteamName=False
+bChatShowTribeName=True
+bReverseTribeLogOrder=False
+EmoteKeyBind1=0
+EmoteKeyBind2=0
+bNoBloodEffects=False
+bLowQualityVFX=False
+bSpectatorManualFloatingNames=False
+bSuppressAdminIcon=False
+bUseSimpleDistanceMovement=False
+bHasSavedGame=False
+bDisableMeleeCameraSwingAnims=False
+bPreventInventoryOpeningSounds=False
+bPreventBiomeWalls=False
+bPreventHitMarkers=False
+bPreventCrosshair=False
+bPreventColorizedItemNames=False
+bHighQualityLODs=False
+bExtraLevelStreamingDistance=False
+bEnableColorGrading=False
+VSyncMode=1
+DOFSettingInterpTime=0.000000
+LastJoinedSessionPerCategory=" "
+LastJoinedSessionPerCategory=" "
+LastJoinedSessionPerCategory=" "
+LastJoinedSessionPerCategory=" "
+LastJoinedSessionPerCategory=" "
+LastJoinedSessionPerCategory=" "
+LastJoinedSessionPerCategory=" "
+LastJoinedSessionPerCategory=" "
+LastJoinedSessionPerCategory=" "
+LastSessionCategoryJoined=-1
+bDisableMenuTransitions=False
+bEnableInventoryItemTooltips=True
+bRemoteInventoryShowCraftables=False
+bNoTooltipDelay=False
+LocalItemSortType=0
+LocalCraftingSortType=0
+RemoteItemSortType=0
+RemoteCraftingSortType=0
+VersionMetaTag=1
+ShowExplorerNoteSubtitles=False
+DisableMenuMusic=False
+DisableDefaultCharacterItems=False
+DisableLoadScreenMusic=False
+bRequestDefaultCharacterItemsOnce=False
+bHasSeenGen2Intro=False
+CinematicForNoteShouldReset=()
+bHasSetupDifficultySP=False
+bHasSetupVisualSettings=False
+agreedToTerms=()
+bHasRunAutoSettings=False
+bHideFloatingPlayerNames=False
+bHideGamepadItemSelectionModifier=False
+bToggleExtendedHUDInfo=False
+PlayActionWheelClickSound=True
+PlayHUDRolloverSound=True
+CompanionReactionVerbosity=3
+EnableEnvironmentalReactions=True
+EnableRespawnReactions=True
+EnableDeathReactions=True
+EnableSayHelloReactions=True
+EnableEmoteReactions=True
+EnableMovementSounds=True
+DisableSubtitles=False
+bEnableASACamera=True
+ConsoleAccess=False
+CompanionSubtitleVerbosityLevel=3
+CompanionIsHiddenState=False
+MaxAscensionLevel=0
+bHostSessionHasBeenOpened=False
+bForceTPVCameraOffset=False
+bDisableTPVCameraInterpolation=False
+bEnableHDROutput=False
+HDRDisplayMinLuminance=-4.000000
+HDRDisplayMidLuminance=20.000000
+HDRDisplayMaxLuminance=1400.000000
+FoliageInteractionDistance=1.000000
+FoliageInteractionDistanceLimit=1.000000
+FoliageInteractionQuantityLimit=1.000000
+bFPVClimbingGear=False
+bFPVGlidingGear=False
+bHasInitializedScreenPercentage=False
+CameraZoomPerDinoNameTag=()
+CameraHeightPerDinoNameTag=()
+PhotomodePresets_Camera=()
+PhotomodePresets_Movement=()
+PhotomodePresets_Splines=()
+PhotomodePresets_PPs=()
+PhotomodePresets_Targeting=()
+PhotomodeLastUsedSettings=()
+MaxLastDeathMark=5
+bSaveLastDeathMark=True
+bShowPingsOnMap=True
+bShowDinosOnMap=True
+bShowWaypointsOnMap=True
+bShowPlayersOnMap=True
+bShowBedsOnMap=True
+AimAssistStrengthMultiplier=1.000000
+bForceShowRadialWheelTexts=False
+bHideStructurePlacementCrosshair=False
+SavedMainMapZoom=1.000000
+SavedOverlayMapZoom=1.000000
+bMinimalUI=False
+FloatingTooltipStructureMode=DEFAULT
+FloatingTooltipDinoMode=DEFAULT
+FloatingTooltipDroppedItemsMode=DEFAULT
+FloatingTooltipPlayerMode=DEFAULT
+TopNotificationMode=DEFAULT
+ItemNotificationMode=MINIMAL
+bMinimapOverlayUseLowOpacity=False
+FilterTypeInventoryLocal=9
+FilterTypeInventoryRemote=9
+bUseGamepadAimAssist=RangeWeaponAlwaysOn
+Gamma1=2.200000
+Gamma2=3.000000
+bDisableBloom=False
+bDisableLightShafts=False
+bUseLowQualityLevelStreaming=True
+bUseDistanceFieldAmbientOcclusion=False
+bPreventItemCraftingSounds=False
+bHighQualityAnisotropicFiltering=False
+AmbientSoundVolume=1.000000
+bUseOldThirdPersonCameraTrace=False
+bUseOldThirdPersonCameraOffset=False
+bShowedGenesisDLCBackground=False
+bShowedGenesis2DLCBackground=False
+bHasStartedTheGameOnce=False
+bViewedAnimatedSeriesTrailer=False
+bViewedARK2Trailer=False
+bShowRTSKeyBinds=True
+bHasCompletedGen2=False
+bEnableFootstepDecals=True
+bEnableFootstepParticles=True
+bShowInfoButtons=True
+bDisablePaintings=False
+StopExplorerNoteAudioOnClose=False
+bVibration=True
+bUIVibration=False
+radialSelectionSpeed=0.650000
+bDisableVirtualCursor=False
+PreventDetailGraphics=False
+GroundClutterRadius=0
+HFSQuality=0
+bMenuGyro=False
+gyroSensitivity=0.500000
+virtualCursorSensitivity=0.500000
+BubbleParticlesMultiplier=1.000000
+CrosshairScale=1.000000
+CrosshairOpacity=1.000000
+CrosshairColor=(R=1.000000,G=1.000000,B=1.000000,A=1.000000)
+CrosshairColorPickerValue=(X=0.000000,Y=0.000000)
+CrosshairColorOverEnemy=(R=0.000000,G=0.376471,B=1.000000,A=1.000000)
+CrosshairColorPickerValueOverEnemy=(X=0.010000,Y=0.500000)
+CrosshairColorOverAlly=(R=0.000000,G=1.000000,B=0.000000,A=1.000000)
+CrosshairColorPickerValueOverAlly=(X=0.260000,Y=0.440000)
+CrosshairColorHitmark=(R=1.000000,G=0.000000,B=0.000000,A=1.000000)
+CrosshairColorPickerValueHitmark=(X=0.010000,Y=0.640000)
+CurrentCameraModeIndex=2
+CurrentDinoCameraModeIndex=1
+bShowAmbientInsectsVFX=True
+TextChatFilterType=0
+VoiceChatFilterType=0
+bAutomaticallyCreateWaypointOnTamingCreatures=True
+bAutomaticallyCreatePOIOnDeath=True
+bEnableDLSS=False
+bEnableDLFG=False
+bEnableReflex=True
+SuperResolutionQualityLevel=0
+bOCIOIsEnabled=True
+OCIOAsset=/Game/ASA/Environment/Common/Color/OCIO_aces_v13_cg.OCIO_aces_v13_cg
+OCIOColorSpace=0
+OCIODisplayView=0
+bUseVSync=False
+bUseDynamicResolution=False
+ResolutionSizeX=1280
+ResolutionSizeY=720
+LastUserConfirmedResolutionSizeX=1280
+LastUserConfirmedResolutionSizeY=720
+WindowPosX=-1
+WindowPosY=-1
+FullscreenMode=1
+LastConfirmedFullscreenMode=1
+PreferredFullscreenMode=1
+Version=5
+AudioQualityLevel=0
+LastConfirmedAudioQualityLevel=0
+FrameRateLimit=60.000000
+DesiredScreenWidth=1280
+DesiredScreenHeight=720
+LastUserConfirmedDesiredScreenWidth=1280
+LastUserConfirmedDesiredScreenHeight=720
+LastRecommendedScreenWidth=-1.000000
+LastRecommendedScreenHeight=-1.000000
+LastCPUBenchmarkResult=-1.000000
+LastGPUBenchmarkResult=-1.000000
+LastGPUBenchmarkMultiplier=1.000000
+bUseHDRDisplayOutput=False
+HDRDisplayOutputNits=1000
+
+[/Script/Engine.GameUserSettings]
+bUseDesiredScreenHeight=False
+
+[ServerSettings]
+ShowMapPlayerLocation=True
+AllowThirdPersonPlayer=True
+ServerCrosshair=True
+RCONEnabled=True
+RCONPort=27030
+TheMaxStructuresInRange=10500
+StartTimeHour=-1
+OxygenSwimSpeedStatMultiplier=1
+StructurePreventResourceRadiusMultiplier=1
+TribeNameChangeCooldown=15
+PlatformSaddleBuildAreaBoundsMultiplier=1
+AlwaysAllowStructurePickup=True
+StructurePickupTimeAfterPlacement=30
+StructurePickupHoldDuration=0.5
+AllowHideDamageSourceFromLogs=True
+RaidDinoCharacterFoodDrainMultiplier=1
+PvEDinoDecayPeriodMultiplier=1
+KickIdlePlayersPeriod=3600
+PerPlatformMaxStructuresMultiplier=1
+AutoSavePeriodMinutes=15
+MaxTamedDinos=5000
+ItemStackSizeMultiplier=1
+RCONServerGameLogBuffer=600
+ImplantSuicideCD=28800
+AllowHitMarkers=True
+
+[SessionSettings]
+SessionName=Nitrado Suck
+
+[/Script/Engine.GameSession]
+MaxPlayers=70</value>
+  </data>
+</root>
