@@ -17,8 +17,9 @@ The tool (Ark Survival Ascended Server Creation tool) will grab the ASA server f
 1. Download the tool using the latest exe https://github.com/Ragonz/Ark-Server-Creation-Tool/releases
 ![Screenshot 2023-11-04 17 06 08](https://github.com/Ragonz/Ark-Server-Creation-Tool/assets/20845629/a6275c23-41c2-42b1-aeeb-82d7fa923940)
 
-2. Open it on your pc (If you get a "do you want this app from an unknown publisher to make changes to your device" popup click Yes)
+2. Open it on your pc (If you get a "Windows Protected your PC" click "Run Anyway" it will then be followed by a "do you want this app from an unknown publisher to make changes to your device" popup click Yes to this.)
 ![Screenshot 2023-11-04 17 06 17](https://github.com/Ragonz/Ark-Server-Creation-Tool/assets/20845629/2612981c-c234-420c-b471-a48a5b0dfa07)
+![Screenshot 2023-11-04 17 47 57](https://github.com/Ragonz/Ark-Server-Creation-Tool/assets/20845629/792b9f79-e098-41b5-8bd7-7cda521d34ff)
 
 3. After opening the tool you will be presented with the first time config, make any changes then click save config
 ![Screenshot 2023-11-04 17 06 26](https://github.com/Ragonz/Ark-Server-Creation-Tool/assets/20845629/baef9b6c-11b7-44e2-9a45-3ca1c0556cc5)
