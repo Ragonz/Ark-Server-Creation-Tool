@@ -47,3 +47,6 @@ After you have edited this file close it & SAVE IT
 
 8. Click "Start Server" After about a minute or so the server will be ready to play on.
 ![Screenshot 2023-11-04 17 29 41](https://github.com/Ragonz/Ark-Server-Creation-Tool/assets/20845629/cd67f201-6403-4cec-a28b-e18dbb035c0b)
+
+If the tool helped you and you want to help us fund its development, consider subscribing to our Patreon
+https://patreon.com/Ragonz?utm_medium=clipboard_copy&utm_source=copyLink&utm_campaign=creatorshare_creator&utm_content=join_link
