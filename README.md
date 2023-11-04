@@ -41,7 +41,7 @@ Wait until the 2nd window goes away as this is what is downloading the server fi
 6. Click "Open Game Config" then click "Yes" to creating the config files
 ![Screenshot 2023-11-04 17 22 17](https://github.com/Ragonz/Ark-Server-Creation-Tool/assets/20845629/764b2c41-240b-42d3-abaa-01dbebde376d)
 
-7. This will open the server settings file where you can change a lot of the settings for the server, you will need to make at least 1 adjustment in here which is setting your servername, you can find it under the [ServerSettings] heading
+7. This will open the server settings file where you can change a lot of the settings for the server, you will need to make at least 1 adjustment in here which is setting your servername, you can find it under the [ServerSettings] heading, add your servername next to SessionName= (for example SessionName=Ragonz)
 ![Screenshot 2023-11-04 17 24 37](https://github.com/Ragonz/Ark-Server-Creation-Tool/assets/20845629/379ca03b-9af7-422b-9b0f-bafe95bcfddb)
 After you have edited this file close it & SAVE IT
 
