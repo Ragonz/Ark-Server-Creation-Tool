@@ -21,7 +21,8 @@ The tool (Ark Survival Ascended Server Creation tool) will grab the ASA server f
 ![Screenshot 2023-11-04 17 06 17](https://github.com/Ragonz/Ark-Server-Creation-Tool/assets/20845629/2612981c-c234-420c-b471-a48a5b0dfa07)
 
 3. After opening the tool you will be presented with the first time config, make any changes then click save config
-![Screenshot 2023-11-04 17 06 26](https://github.com/Ragonz/Ark-Server-Creation-Tool/assets/20845629/4891708e-cc19-4b1a-959f-7fbf96db65a8)
+![Screenshot 2023-11-04 17 06 26](https://github.com/Ragonz/Ark-Server-Creation-Tool/assets/20845629/baef9b6c-11b7-44e2-9a45-3ca1c0556cc5)
+
 
 The changes you can make currently are location in which to install the server "Game Folder"
 Automatically creating windows firewall rules yes/no
