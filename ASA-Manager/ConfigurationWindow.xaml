@@ -18,7 +18,7 @@
         <Label Content="Settings used to launch the ARK: SA server" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="202,101,0,0" Foreground="#FF6D6D6D"/>
         <Label Content="Leave blank for default port 7777" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="220,177,0,0" Foreground="#FF6D6D6D"/>
         <Label Content="IP Address" HorizontalAlignment="Left" Margin="55,226,0,0" VerticalAlignment="Top"/>
-        <TextBox x:Name="txt_IPAddress" Margin="126,228,0,0" VerticalAlignment="Top" Height="21" HorizontalAlignment="Left" Width="132" PreviewTextInput="NumberValidationTextBox" MaxLength="5"/>
+        <TextBox x:Name="txt_IPAddress" Margin="126,228,0,0" VerticalAlignment="Top" Height="21" HorizontalAlignment="Left" Width="132" />
         <CheckBox x:Name="chk_useMultihome" Content="Use specific IP address" HorizontalAlignment="Left" Margin="126,208,0,0" VerticalAlignment="Top"/>
         <CheckBox x:Name="chk_overrideLaunchArgs" Content="Override Launch Arguments" HorizontalAlignment="Left" Margin="126,133,0,0" VerticalAlignment="Top"/>
         <Label Content="Launch Arguments" HorizontalAlignment="Left" Margin="11,151,0,0" VerticalAlignment="Top"/>
