@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:ARKServerCreationTool"
         mc:Ignorable="d"
-        Title="ASCT Updater" Height="450" Width="800" Closing="Window_Closing">
+        Title="ASCT - Updater" Height="450" Width="800" Closing="Window_Closing">
     <Grid>
         <Label Content="Updater" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top" FontSize="16"/>
         <Button x:Name="btn_runUpdate" Content="Update Game Files" Margin="10,0,0,10" Height="52" VerticalAlignment="Bottom" HorizontalAlignment="Left" Width="160" Click="btn_runUpdate_Click"/>

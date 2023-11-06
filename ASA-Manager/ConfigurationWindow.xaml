@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:ARKServerCreationTool"
         mc:Ignorable="d"
-        Title="ASCT Configuration" Height="408" Width="586">
+        Title="ASCT - Configuration" Height="408" Width="586">
     <Grid>
         <Label Content="Configuration" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="10,10,0,0" FontSize="16"/>
         <Label Content="Game Folder" HorizontalAlignment="Left" Margin="10,48,0,0" VerticalAlignment="Top"/>
