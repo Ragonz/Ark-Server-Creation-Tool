@@ -18,6 +18,7 @@ using System.IO.Compression;
 using System.Diagnostics;
 using System.Printing;
 using System.Text.RegularExpressions;
+using MessageBox = System.Windows.MessageBox;
 
 namespace ARKServerCreationTool
 {
@@ -48,6 +49,11 @@ namespace ARKServerCreationTool
         {
             if (!IsUpdating())
             {
+                if (GameProcessManager.IsRunning)
+                {
+                    MessageBoxResult msgResult = MessageBox.Show("The ASA server is currently running. ASCT will stop the game server to perform the update. Would you like to continue to update?", "Server running - continue?", MessageBoxButton.YesNo, MessageBoxImage.Question);
+                    if (msgResult == MessageBoxResult.No) { return;  }
+                }
                 btn_runUpdate.IsEnabled = false;
                 txt_updateConsole.Text = string.Empty;
                 updateTask = Task.Factory.StartNew(() => { Update(); });                
