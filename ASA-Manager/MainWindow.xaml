@@ -10,7 +10,8 @@
         <Button x:Name="btn_run" Content="RUN" Margin="0,0,10,10" Click="Button_Click" HorizontalAlignment="Right" Width="204" Height="43" VerticalAlignment="Bottom"/>
         <Button x:Name="btn_openUpdater" Content="Open Updater" HorizontalAlignment="Left" Margin="187,10,0,0" VerticalAlignment="Top" Height="28" Width="185" Click="btn_openUpdater_Click"/>
         <Button x:Name="btn_openConfig" Content="Open Configuration" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top" Height="28" Width="172" Click="btn_openConfig_Click"/>
-        <Button x:Name="btn_openConfigFolder" Content="Open Game Config" HorizontalAlignment="Left" Margin="377,10,0,0" VerticalAlignment="Top" Height="28" Width="185" Click="btn_openConfigFolder_Click"/>
+        <Button x:Name="btn_openGUSConfig" Content="Open GUS.ini Config" HorizontalAlignment="Left" Margin="377,10,0,0" VerticalAlignment="Top" Height="28" Width="185" Click="btn_openGUSConfig_Click"/>
+        <Button x:Name="btn_openGameINIConfig" Content="Open Game.ini Config" HorizontalAlignment="Left" Margin="377,43,0,0" VerticalAlignment="Top" Height="28" Width="185" Click="btn_openGameINIConfig_Click"/>
 
     </Grid>
 </Window>

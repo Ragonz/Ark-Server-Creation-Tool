@@ -61,6 +61,15 @@ namespace ARKServerCreationTool.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to [/script/shootergame.shootergamemode].
+        /// </summary>
+        internal static string GameConfigTemplate {
+            get {
+                return ResourceManager.GetString("GameConfigTemplate", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to [ScalabilityGroups]
         ///sg.ResolutionQuality=75
         ///sg.ViewDistanceQuality=1

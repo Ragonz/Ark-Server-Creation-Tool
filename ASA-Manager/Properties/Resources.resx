@@ -117,6 +117,9 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
+  <data name="GameConfigTemplate" xml:space="preserve">
+    <value>[/script/shootergame.shootergamemode]</value>
+  </data>
   <data name="GUSConfigTemplate" xml:space="preserve">
     <value>[ScalabilityGroups]
 sg.ResolutionQuality=75
@@ -429,7 +432,7 @@ ImplantSuicideCD=28800
 AllowHitMarkers=True
 
 [SessionSettings]
-SessionName=Nitrado Suck
+SessionName=Server Created by ASCT
 
 [/Script/Engine.GameSession]
 MaxPlayers=70</value>

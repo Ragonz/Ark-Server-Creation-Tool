@@ -104,7 +104,7 @@ namespace ARKServerCreationTool
             SetButtonStatus();
         }
 
-        private void btn_openConfigFolder_Click(object sender, RoutedEventArgs e)
+        private void btn_openGUSConfig_Click(object sender, RoutedEventArgs e)
         {
             string GUSConfigPath = Path.Combine(((ASCTConfiguration)Application.Current.Properties["globalConfig"]).GameDirectory, @"ShooterGame\Saved\Config\WindowsServer\GameUserSettings.ini");
 
@@ -114,7 +114,7 @@ namespace ARKServerCreationTool
             }
             else
             {
-                string message = "No config file currently exists. Would you like to create one from the template?";
+                string message = "No gameusersettings.ini file currently exists. Would you like to create one from the template?";
                 string caption = "Missing Config";
                 MessageBoxResult result = MessageBox.Show(message, caption,
                               MessageBoxButton.YesNo );
@@ -127,5 +127,31 @@ namespace ARKServerCreationTool
                 }
             }
         }
+
+        private void btn_openGameINIConfig_Click(object sender, RoutedEventArgs e)
+        {
+            string GameConfigPath = Path.Combine(((ASCTConfiguration)Application.Current.Properties["globalConfig"]).GameDirectory, @"ShooterGame\Saved\Config\WindowsServer\Game.ini");
+
+            if (File.Exists(GameConfigPath))
+            {
+                Process.Start("notepad.exe", GameConfigPath).WaitForExit();
+            }
+            else
+            {
+                string message = "No game.ini file currently exists. Would you like to create one from the template?";
+                string caption = "Missing Config";
+                MessageBoxResult result = MessageBox.Show(message, caption,
+                              MessageBoxButton.YesNo);
+
+                if (result == MessageBoxResult.Yes)
+                {
+                    Directory.CreateDirectory(Path.GetDirectoryName(GameConfigPath));
+                    File.WriteAllText(GameConfigPath, Properties.Resources.GameConfigTemplate);
+                    Process.Start("notepad.exe", GameConfigPath).WaitForExit();
+                }
+            }
+        }
+
+
     }
 }
