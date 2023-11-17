@@ -93,6 +93,11 @@ namespace ARKServerCreationTool
             }
         }
 
+        public string RCONIPaddress;
+        public ushort RCONPort;
+        public string RCONPassword;
+
+        public ushort WaitForShutdownTime = 60;
 
         public void Save()
         {

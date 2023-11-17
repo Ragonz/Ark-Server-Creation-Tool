@@ -14,6 +14,8 @@ using System.Windows.Navigation;
 using System.Diagnostics;
 using System.IO;
 using System.Windows.Threading;
+using RconSharp;
+
 
 namespace ARKServerCreationTool
 {
@@ -37,16 +39,23 @@ namespace ARKServerCreationTool
             SetButtonStatus();
         }
 
-        private void Button_Click(object sender, RoutedEventArgs e)
+        private async void btn_run_Click(object sender, RoutedEventArgs e)
         {
             if (buttonStatus == RunButtonStatus.Run)
             {
                 GameProcessManager.Start();
             }
-            else if (buttonStatus == RunButtonStatus.Stop)
+            else if (buttonStatus == RunButtonStatus.Stop && GameProcessManager.IsRunning)
             {
-                GameProcessManager.Stop();
+                GameProcessManager.Shutdown();
             }
+
+            SetButtonStatus();
+        }
+
+        private void btn_force_kill_Click(object sender, RoutedEventArgs e)
+        {
+            GameProcessManager.ForceStop();
 
             SetButtonStatus();
         }
@@ -56,12 +65,14 @@ namespace ARKServerCreationTool
             if (GameProcessManager.IsRunning)
             {
                 buttonStatus = RunButtonStatus.Stop;
-                btn_run.Content = "Stop Server";
+                btn_run.Content = "Shutdown Server";
+                btn_force_kill.IsEnabled = true;
             }
             else
             {
                 buttonStatus = RunButtonStatus.Run;
                 btn_run.Content = "Start Server";
+                btn_force_kill.IsEnabled = false;
             }
         }
 

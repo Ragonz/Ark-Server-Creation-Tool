@@ -75,7 +75,7 @@ namespace ARKServerCreationTool
                 if (serverWasRunning = GameProcessManager.IsRunning)
                 {
                     AddToConsole("Stopping Server...");
-                    GameProcessManager.Stop();
+                    GameProcessManager.Shutdown(true).Wait();
                     AddToConsole("Server Stoppped");
                 }
 

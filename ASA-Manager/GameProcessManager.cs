@@ -1,8 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using RconSharp;
+using System;
 using System.Diagnostics;
 using System.Linq;
-using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
 using System.Windows;
@@ -98,22 +97,72 @@ namespace ARKServerCreationTool
             {
                 MessageBox.Show(e.Message + Environment.NewLine + e.StackTrace);
                 return false;
-            }            
+            }
         }
 
+        public static async Task Shutdown(bool forceKillIfFail = false)
+        {
+            try
+            {
 
-        public static bool Stop()
+                RconClient client = RconClient.Create(((ASCTConfiguration)Application.Current.Properties["globalConfig"]).RCONIPaddress, ((ASCTConfiguration)Application.Current.Properties["globalConfig"]).RCONPort);
+
+                await client.ConnectAsync();
+
+                bool authenticated = await client.AuthenticateAsync(((ASCTConfiguration)Application.Current.Properties["globalConfig"]).RCONPassword);
+
+                //authTask.Wait();
+
+                if (authenticated)
+                {
+                    await client.ExecuteCommandAsync("DoExit");
+                    MessageBox.Show("DoExit command send to server.");
+                }
+                else
+                {
+                    if (!forceKillIfFail) MessageBox.Show("Could not authenticate with the RCON server. Please check admin passowrd");
+                }
+
+                client.Disconnect();
+
+                if (forceKillIfFail)
+                {
+                    int maxWaitTime = ((ASCTConfiguration)Application.Current.Properties["globalConfig"]).WaitForShutdownTime;
+
+                    for (int i = 0; i < maxWaitTime; i++)
+                    {
+                        Thread.Sleep(1000);
+
+                        if (!IsRunning)
+                        {
+                            break;
+                        }
+                    }
+                }
+            }
+            catch (System.Net.Sockets.SocketException)
+            {
+                if (forceKillIfFail)
+                {
+                    ForceStop();
+                }
+                else
+                {
+                    throw;
+                }
+            }
+        }
+
+        public static void ForceStop()
         {
             int tries = 0;
             int maxTries = 5;
 
             while (IsRunning && tries++ <= maxTries)
-            {                
+            {
                 gameProcess.Kill();
                 Thread.Sleep(tries * 10);
             }
-
-            return IsRunning;
         }
     }
 }

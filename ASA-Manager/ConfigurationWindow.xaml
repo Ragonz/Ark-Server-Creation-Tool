@@ -7,7 +7,7 @@
         mc:Ignorable="d"
         Title="ASCT - Configuration" Height="408" Width="586">
     <Grid>
-        <Label Content="Configuration" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="10,10,0,0" FontSize="16"/>
+        <Label Content="ASCT Configuration" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="10,10,0,0" FontSize="16"/>
         <Label Content="Game Folder" HorizontalAlignment="Left" Margin="10,48,0,0" VerticalAlignment="Top"/>
         <TextBox x:Name="txt_gameDir" Margin="93,50,113,0" VerticalAlignment="Top" Height="21"/>
         <Button x:Name="btn_saveConfig" Content="Save Config" Margin="0,17,10,0" Height="20" VerticalAlignment="Top" Click="btn_saveConfig_Click" HorizontalAlignment="Right" Width="117"/>
@@ -25,5 +25,13 @@
         <TextBox x:Name="txt_customLaunchArgs" Margin="125,153,26,0" VerticalAlignment="Top" Height="21" />
         <Label Content="" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="299,128,0,0" Foreground="#FF6D6D6D"/>
         <CheckBox x:Name="chk_autoFirewallRules" Content="Automatically create firewall rule" HorizontalAlignment="Left" Margin="93,76,0,0" VerticalAlignment="Top"/>
+        <Label Content="RCON Settings - " HorizontalAlignment="Left" VerticalAlignment="Top" Margin="10,257,0,0" FontSize="14"/>
+        <Label Content="Settings used to send the shutdown command. Must match game settings" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="121,259,0,0" Foreground="#FF6D6D6D"/>
+        <Label Content="RCON Port" HorizontalAlignment="Left" Margin="52,288,0,0" VerticalAlignment="Top"/>
+        <TextBox x:Name="txt_RCONPort" Margin="126,290,0,0" VerticalAlignment="Top" Height="21" HorizontalAlignment="Left" Width="90" PreviewTextInput="NumberValidationTextBox" MaxLength="5"/>
+        <Label Content="RCON IP Address" HorizontalAlignment="Left" Margin="20,314,0,0" VerticalAlignment="Top"/>
+        <TextBox x:Name="txt_RCONIPAddress" Margin="126,316,0,0" VerticalAlignment="Top" Height="21" HorizontalAlignment="Left" Width="132" />
+        <Label Content="Admin Password" HorizontalAlignment="Left" Margin="21,340,0,0" VerticalAlignment="Top"/>
+        <TextBox x:Name="txt_adminPassword" Margin="126,342,25,0" VerticalAlignment="Top" Height="21" />
     </Grid>
 </Window>

@@ -33,6 +33,10 @@ namespace ARKServerCreationTool
             txt_IPAddress.Text = ((ASCTConfiguration)Application.Current.Properties["globalConfig"]).IPAddress;
             chk_autoFirewallRules.IsChecked = ((ASCTConfiguration)Application.Current.Properties["globalConfig"]).AutomaticallyCreateFirewallRule;
 
+            txt_RCONIPAddress.Text = ((ASCTConfiguration)Application.Current.Properties["globalConfig"]).RCONIPaddress;
+            txt_RCONPort.Text = ((ASCTConfiguration)Application.Current.Properties["globalConfig"]).RCONPort.ToString();
+            txt_adminPassword.Text = ((ASCTConfiguration)Application.Current.Properties["globalConfig"]).RCONPassword;
+
             this.firstLaunch = firstLaunch;
         }
 
@@ -52,6 +56,9 @@ namespace ARKServerCreationTool
             ((ASCTConfiguration)Application.Current.Properties["globalConfig"]).UseMultihome = chk_useMultihome.IsChecked.Value;
             ((ASCTConfiguration)Application.Current.Properties["globalConfig"]).IPAddress = txt_IPAddress.Text;
             ((ASCTConfiguration)Application.Current.Properties["globalConfig"]).AutomaticallyCreateFirewallRule = chk_autoFirewallRules.IsChecked.Value;
+            ((ASCTConfiguration)Application.Current.Properties["globalConfig"]).RCONIPaddress = txt_RCONIPAddress.Text;
+            ((ASCTConfiguration)Application.Current.Properties["globalConfig"]).RCONPort = ushort.Parse(txt_RCONPort.Text);
+            ((ASCTConfiguration)Application.Current.Properties["globalConfig"]).RCONPassword = txt_adminPassword.Text;
 
             ((ASCTConfiguration)Application.Current.Properties["globalConfig"]).Save();
 
