@@ -49,5 +49,26 @@ After you have edited this file close it & SAVE IT
 8. Click "Start Server" After about a minute or so the server will be ready to play on.
 ![Screenshot 2023-11-04 17 29 41](https://github.com/Ragonz/Ark-Server-Creation-Tool/assets/20845629/cd67f201-6403-4cec-a28b-e18dbb035c0b)
 
+# Creating a cluster
+
+The current version of ASCT doesn't directly aid in the creation of clusters. However, it is still possible to manually configure this. This guide demonstates how to create a 2 server cluster.
+
+Step 1: Download ASCT to 2 different folders on the same machine
+![Screenshot 2024-04-02 013313](https://github.com/Ragonz/Ark-Server-Creation-Tool/assets/12957193/9b2ebb17-7b68-4a1e-824b-d36510c394d8)
+
+Step 2: Configure each server, ensuring that you give them unique IP addresses. We'll need to override the launch arguments as cluster launch arguments are not currently handled by the tool. 
+
+You need to add a Cluster ID setting, which is what the game uses to group servers, and thje ClusterDirOverride setting, which tells the game which folder to use to share files between the servers. Both settings must be identical between the 2 servers for the cluster to work properly. 
+The cluster ID argument is `-clusterid=`
+the cluster dir override argument is `-ClusterDirOverride=`
+
+![Screenshot 2024-04-02 014433](https://github.com/Ragonz/Ark-Server-Creation-Tool/assets/12957193/c378ad1c-8485-4122-a3c9-9169568fe3e4)
+
+Step 3: Allow the updater to download the files for each server. 
+![Screenshot 2024-04-02 013829](https://github.com/Ragonz/Ark-Server-Creation-Tool/assets/12957193/ee332a0f-8396-4f18-baff-3cdd63a0bae1)
+
+Step 4: Start both servers. No further steps are required for clustering. You can configure each service as you would normally. 
+![Screenshot 2024-04-02 014604](https://github.com/Ragonz/Ark-Server-Creation-Tool/assets/12957193/b2a09fd5-17fa-42a2-8e0a-514fd1f03d44)
+
 If the tool helped you and you want to help us fund its development, consider subscribing to our Patreon
 https://www.patreon.com/Ragonz
