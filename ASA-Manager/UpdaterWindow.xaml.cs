@@ -19,6 +19,7 @@ using System.Diagnostics;
 using System.Printing;
 using System.Text.RegularExpressions;
 using MessageBox = System.Windows.MessageBox;
+using System.Collections.Concurrent;
 
 namespace ARKServerCreationTool
 {
@@ -27,211 +28,200 @@ namespace ARKServerCreationTool
     /// </summary>
     public partial class UpdaterWindow : Window
     {
-        Task updateTask;
+        private ASCTGlobalConfig config => ASCTGlobalConfig.Instance;
 
-        bool firstLaunch;
+        List<UpdatableServerListEntry> updatableServers = new List<UpdatableServerListEntry>();
 
-        public UpdaterWindow(bool firstLaunch = false)
+        public UpdaterWindow(HashSet<int> preselectServerIDs = null)
         {
             InitializeComponent();
 
-            if (firstLaunch)
+            RefreshUpdateableServerList(preselectServerIDs);
+
+            btn_runUpdate.IsEnabled = !IsUpdating;
+            txt_updateConsole.Text = updateLog;
+        }
+
+        private static bool IsUpdating => updateTask != null && updateTask.Status is TaskStatus.Running or TaskStatus.WaitingToRun;
+
+        private void RefreshUpdateableServerList(HashSet<int> preselectServerIDs = null)
+        {
+            updatableServers.Clear();
+
+            foreach (ASCTServerConfig item in config.Servers)
             {
-                txt_updateConsole.Text = "Click \"Update Game Files\" to download the game.";
-                btn_exit.Content = "Continue";
-                btn_exit.IsEnabled = false;
+                updatableServers.Add(new UpdatableServerListEntry(item.ID));
             }
 
-            this.firstLaunch = firstLaunch;
+            dg_updatableServers.ItemsSource = updatableServers;
+
+            if (preselectServerIDs != null)
+            {
+
+                for (int i = 0; i < dg_updatableServers.Items.Count; i++)
+                {
+                    if (preselectServerIDs.Contains(((UpdatableServerListEntry)dg_updatableServers.Items[i]).targetServerID))
+                    {
+                        dg_updatableServers.SelectedItems.Add(dg_updatableServers.Items[i]);
+                    }
+                }
+            }
+            dg_updatableServers.Items.Refresh();
+
+            if (dg_updatableServers.IsEnabled)
+            {
+                dg_updatableServers.Focus();
+            }
         }
+
+        private static Task updateTask = null;
+        private static string updateLog = string.Empty;
 
         private async void btn_runUpdate_Click(object sender, RoutedEventArgs e)
         {
-            if (!IsUpdating())
+            if (updateTask == null || updateTask.Status is not TaskStatus.Running or TaskStatus.WaitingToRun)
             {
-                if (GameProcessManager.IsRunning)
-                {
-                    MessageBoxResult msgResult = MessageBox.Show("The ASA server is currently running. ASCT will stop the game server to perform the update. Would you like to continue to update?", "Server running - continue?", MessageBoxButton.YesNo, MessageBoxImage.Question);
-                    if (msgResult == MessageBoxResult.No) { return;  }
-                }
+                HashSet<int> serverIDsToUpdate = dg_updatableServers.SelectedItems.Cast<UpdatableServerListEntry>().Select(s => s.targetServerID).ToHashSet();
+                
+                updateTask = Task.Factory.StartNew(() => { UpdateButtonTask(serverIDsToUpdate); });
+
                 btn_runUpdate.IsEnabled = false;
-                txt_updateConsole.Text = string.Empty;
-                updateTask = Task.Factory.StartNew(() => { Update(); });                
             }
         }
 
-        private bool IsUpdating()
-        {           
-            return updateTask != null && updateTask.Status == TaskStatus.Running;
-        }
-
-        List<string> consoleBatchQueue = new List<string>();
-
-        private void Update()
+        private void UpdateButtonTask(HashSet<int> serverIDsToUpdate)
         {
             try
             {
-                bool serverWasRunning;
-                if (serverWasRunning = GameProcessManager.IsRunning)
-                {
-                    AddToConsole("Stopping Server...");
-                    GameProcessManager.Stop();
-                    AddToConsole("Server Stoppped");
-                }
-
-                consoleBatchQueue.Clear();
-
-                string depotDownloaderFolder = ((ASCTConfiguration)Application.Current.Properties["globalConfig"]).depotDownloaderFolder;
-                string depotDownloaderURL = ((ASCTConfiguration)Application.Current.Properties["globalConfig"]).depotDownloaderURL;
-                string depotDownloaderExe = ((ASCTConfiguration)Application.Current.Properties["globalConfig"]).depotDownloaderExe;
-
-                string directoryToUpdate = ((ASCTConfiguration)Application.Current.Properties["globalConfig"]).GameDirectory;
-                ulong serverAppID = ((ASCTConfiguration)Application.Current.Properties["globalConfig"]).serverAppID;
-
-                AddToConsole($"Updating Game Files in {directoryToUpdate} - {DateTime.Now:HH:mm:ss}");
-
-                if (Directory.Exists("DepotDownloader"))
-                {
-                    AddToConsole($"Clearing old files");
-                    Directory.Delete("DepotDownloader", true);
-                }
-
-                Directory.CreateDirectory(depotDownloaderFolder);
-
-                string zipFilePath = Path.Combine(depotDownloaderFolder, "DepotDownloader.zip");
-
-                using (WebClient wc = new WebClient())
-                {
-                    AddToConsole($"Downloading Depot Downloader");
-                    wc.DownloadFile(depotDownloaderURL, zipFilePath);
-                }
-
-                AddToConsole($"Extracting Depot Downloader");
-                ZipFile.ExtractToDirectory(zipFilePath, depotDownloaderFolder);
-
-                string depotDownloaderExePath = Path.Combine(depotDownloaderFolder, depotDownloaderExe);
-                if (!File.Exists(depotDownloaderExePath))
-                {
-                    ExitUpdateMessage($"ERROR: Could not locate{depotDownloaderExe} - Update aborted");
-                }
-
-                AddToConsole("Lauching Updater");
-
-                ProcessStartInfo startInfo = new ProcessStartInfo
-                {
-                    FileName = depotDownloaderExePath,
-                    Arguments = $"-app {serverAppID} -dir {directoryToUpdate} -validate",
-                    RedirectStandardOutput = false,
-                    CreateNoWindow = false,
-                    UseShellExecute = false
-                };
-
-                Process p = new Process();
-                p.StartInfo = startInfo;
-
-                p.OutputDataReceived += (s, e) => { AddToConsole(e.Data); };
-
-                p.Start();
-               // p.BeginOutputReadLine();
-                p.WaitForExit();
-
-                if (serverWasRunning)
-                {
-                    AddToConsole("Starting server");
-                    GameProcessManager.Start();
-                    AddToConsole("Done");
-                }
+                UpdateMultipleServers(serverIDsToUpdate);
 
             }
             catch (Exception e)
             {
-                ExitUpdateMessage(e.Message + Environment.NewLine + e.StackTrace);
+                WriteToUpdateOutput(e.ToString());
             }
-            ExitUpdateMessage("Update Complete");
-        }
-
-        private void ExitUpdateMessage(string message)
-        {
-            this.Dispatcher.Invoke(() =>
+            finally
             {
-                txt_updateConsole.Text += message + Environment.NewLine;
-                btn_runUpdate.IsEnabled = true;
-                btn_exit.IsEnabled = true;
-            });
+                Dispatcher.Invoke(() =>
+                {
+                    btn_runUpdate.IsEnabled = true;
+                });
+            }
         }
-        
-        private delegate void AddToConsoleCallBack(string message);
 
-        Stopwatch timer = new Stopwatch();
+        private void UpdateMultipleServers(HashSet<int> serverIDsToUpdate)
+        {
+            if (serverIDsToUpdate == null)
+            {
+                throw new ArgumentNullException();
+            }
 
-        private void AddToConsole(string message)
+            WriteToUpdateOutput($"Updating {serverIDsToUpdate.Count} servers");
+            int i = 0;
+            foreach (int serverID in serverIDsToUpdate)
+            {
+                i++;
+                WriteToUpdateOutput($"Updating server {i} of {serverIDsToUpdate.Count}");
+                UpdateSingleServer(serverID);
+            }
+            WriteToUpdateOutput($"Finished updating servers");
+        }
+
+        private void UpdateSingleServer(int targetServerID, bool downloadDepotDownloader = false)
+        {
+            string depotDownloaderExePath = Path.Combine(config.depotDownloaderFolder, config.depotDownloaderExe);
+            if (!File.Exists(depotDownloaderExePath))
+            {
+                MessageBoxResult boxResult = MessageBox.Show("DepotDownloader has not yet been downloaded. This tool is required to perform updates. \n Would you like to download it to continue with the update?", "Unable to locate DepotDownloader", MessageBoxButton.YesNo);
+
+                if (boxResult == MessageBoxResult.Yes)
+                {
+                    WriteToUpdateOutput("Downloading DepotDownloader");
+                    Directory.CreateDirectory(config.depotDownloaderFolder);
+
+                    string zipFilePath = Path.Combine(config.depotDownloaderFolder, "DepotDownloader.zip");
+                    using (WebClient wc = new WebClient())
+                    {
+                        wc.DownloadFile(config.depotDownloaderURL, zipFilePath);
+                    }
+                    WriteToUpdateOutput("Extracting DepotDownloader");
+                    ZipFile.ExtractToDirectory(zipFilePath, config.depotDownloaderFolder);
+                }
+            }
+
+
+            ASCTServerConfig targetServer = config.Servers.Where(s => s.ID == targetServerID).FirstOrDefault();
+
+            WriteToUpdateOutput($"Updating: \"{targetServer.Name}\" in {targetServer.GameDirectory} ");
+
+            bool serverWasRunning = targetServer.IsRunning;
+
+            int serverLockId = targetServer.ProcessManager.LockServer("Update in progress");
+
+            if (serverWasRunning)
+            {
+                WriteToUpdateOutput($"Stopping server...");
+                targetServer.ProcessManager.Stop();
+                WriteToUpdateOutput($"Server stopped.");
+            }
+
+            ProcessStartInfo startInfo = new ProcessStartInfo
+            {
+                FileName = depotDownloaderExePath,
+                Arguments = $"-app {config.serverAppID} -dir {targetServer.GameDirectory} -validate",
+                RedirectStandardOutput = false,
+                CreateNoWindow = false,
+                UseShellExecute = false
+            };
+
+            Process p = new Process();
+            p.StartInfo = startInfo;
+
+            p.Start();
+            p.WaitForExit();
+
+            if (serverWasRunning)
+            {
+                WriteToUpdateOutput($"Starting server...");
+                targetServer.ProcessManager.Start();
+                WriteToUpdateOutput($"Started server.");
+            }
+
+            targetServer.ProcessManager.UnlockServer(serverLockId);
+        }
+
+        private void WriteToUpdateOutput(string message)
         {
             Dispatcher.Invoke(() =>
             {
-                txt_updateConsole.Text += message + Environment.NewLine;
+                updateLog += message + Environment.NewLine;
+
+                txt_updateConsole.Text = updateLog;
                 ConsoleScrollViewer.ScrollToBottom();
             });
         }
+    }
 
-        bool alreadyReturning = false;
-
-        private void btn_exit_Click(object sender, RoutedEventArgs e)
+    class UpdatableServerListEntry
+    {
+        public UpdatableServerListEntry(int serverID)
         {
-            if (IsUpdating())
+            targetServerID = serverID;
+        }
+
+        private ASCTServerConfig targetServer
+        {
+            get
             {
-                MessageBox.Show("An update is currently running. Exiting now could cause issues. Please wait for it to finish.");
-            }
-            else
-            {
-                BackToMain();
+                return ASCTGlobalConfig.Instance.Servers.Where(s => s.ID == targetServerID).DefaultIfEmpty(null).FirstOrDefault();
             }
         }
 
-        private void Window_Closing(object sender, System.ComponentModel.CancelEventArgs e)
-        {
-            if (IsUpdating())
-            {
-                MessageBox.Show("An update is currently running. Exiting now could cause issues. Please wait for it to finish.");
-                e.Cancel = true;
-            }
-            else 
-            {
-                BackToMain(false);
-            }
-        }
+        public int targetServerID { get; private set; }
 
-        private void BackToMain(bool triggerClose = true)
-        {
-            try
-            {
-                if (alreadyReturning)
-                {
-                    return;
-                }
-
-                alreadyReturning = true;
-
-                MainWindow main = null;
-
-                main = Application.Current.Windows.OfType<MainWindow>().FirstOrDefault();
-
-                if (main != null)
-                {
-                    main.Activate();
-                }
-                else
-                {
-                    main = new MainWindow();
-                    main.Show();
-                }
-
-                if (triggerClose) this.Close();
-            }
-            catch (Exception e )
-            {
-                MessageBox.Show(e.Message + Environment.NewLine + e.StackTrace);
-                throw;
-            }
-        }
+        public string serverName => targetServer.Name;
+        public string serverCluster => targetServer.ClusterKey;
+        public string serverRunning => targetServer.IsRunningToString;
     }
 }
+

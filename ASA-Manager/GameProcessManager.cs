@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Diagnostics;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading;
@@ -10,15 +11,53 @@ using WindowsFirewallHelper;
 
 namespace ARKServerCreationTool
 {
-    internal static class GameProcessManager
+    internal class GameProcessManager
     {
-        private static Process gameProcess;
+        static Random rng = new Random();
 
-        public static bool IsRunning
+        private static Dictionary<int, GameProcessManager> managers = new Dictionary<int, GameProcessManager>();
+        private Dictionary<int, string> serverLocks = new Dictionary<int, string>();
+
+        public int targetServerID { get; private set; }
+
+        private ASCTServerConfig targetServer { get { return ASCTGlobalConfig.Instance.Servers[targetServerID]; } }
+
+        private GameProcessManager(int targetServerID)
+        {
+            this.targetServerID = targetServerID;
+        }
+
+        public static GameProcessManager GetGameProcessManager(int targetServerID)
+        {
+            if (!managers.Keys.Contains(targetServerID))
+            {
+                managers.Add(targetServerID, new GameProcessManager(targetServerID));
+            }
+            return managers[targetServerID];
+
+        }
+
+        private Process gameProcess;
+
+        public int LockServer(string LockMessage)
+        {
+            int lockID = rng.Next();
+
+            serverLocks.Add(lockID, LockMessage);
+
+            return lockID;
+        }
+
+        public void UnlockServer(int lockID)
+        {
+            serverLocks.Remove(lockID);
+        }
+
+        public bool IsRunning
         {
             get
             {
-                string exePath = ((ASCTConfiguration)Application.Current.Properties["globalConfig"]).ExecutablePath;
+                string exePath = targetServer.EXEPath;
 
                 if (gameProcess != null && gameProcess.Id > 0 && !gameProcess.HasExited)
                 {
@@ -26,7 +65,10 @@ namespace ARKServerCreationTool
                 }
                 else
                 {
-                    Process[] processes = Process.GetProcesses();
+                    string fileName = Path.GetFileNameWithoutExtension(targetServer.EXEPath);
+                    Process[] processes = Process.GetProcessesByName(fileName);
+
+                    gameProcess = null;
 
                     for (int i = 0; i < processes.Length; i++)
                     {
@@ -35,20 +77,21 @@ namespace ARKServerCreationTool
                             if (processes[i].MainModule.FileName.Equals(exePath, StringComparison.OrdinalIgnoreCase))
                             {
                                 gameProcess = processes[i];
-                                return true;
+                                break;
                             }
                         }
                         catch (Exception)
                         {
-                            //Won't be able to access MainModule of 32bit programs
+                            //Won'T be able to access MainModule of 32bit programs
                         }
                     }
-                    return false;
+
+                    return gameProcess != null;
                 }
             }
         }
 
-        public static bool Start()
+        public bool Start()
         {
             try
             {
@@ -57,27 +100,36 @@ namespace ARKServerCreationTool
                 {
                     success = true; ;
                 }
-                else
+                else if (serverLocks.Count != 0)
                 {
+                    MessageBox.Show($"{targetServer.Name} is locked: \n{string.Join("\n", serverLocks.Select(l => l.Value))}", "Unable to start locked server");
+                }
+                else
+                {  
                     gameProcess = new Process();
                     ProcessStartInfo si = new ProcessStartInfo();
                     si.UseShellExecute = false;
-                    si.FileName = ((ASCTConfiguration)Application.Current.Properties["globalConfig"]).ExecutablePath;
-                    si.Arguments = ((ASCTConfiguration)Application.Current.Properties["globalConfig"]).LaunchArguments;
-                    si.WorkingDirectory = ((ASCTConfiguration)Application.Current.Properties["globalConfig"]).GameDirectory;
+                    si.FileName = targetServer.EXEPath;
+                    si.Arguments = targetServer.LaunchArguments;
+                    si.WorkingDirectory = targetServer.GameDirectory;
 
                     gameProcess.StartInfo = si;
 
                     success = gameProcess.Start();
 
-                    if (((ASCTConfiguration)Application.Current.Properties["globalConfig"]).AutomaticallyCreateFirewallRule && !FirewallManager.Instance.Rules.Any(rule => rule.ApplicationName != null && rule.ApplicationName.Equals(((ASCTConfiguration)Application.Current.Properties["globalConfig"]).ExecutablePath, StringComparison.OrdinalIgnoreCase)))
+                    if (!success)
+                    {
+                        gameProcess = null;
+                    }
+
+                    if (ASCTGlobalConfig.Instance.AutomaticallyCreateFirewallRule && !FirewallManager.Instance.Rules.Any(r => r.IsEnable && r.Direction ==  FirewallDirection.Inbound && r.Action == FirewallAction.Allow && r.ApplicationName != null && r.ApplicationName.Equals(targetServer.EXEPath, StringComparison.OrdinalIgnoreCase)))
                     {
                         try
                         {
                             var rule = FirewallManager.Instance.CreateApplicationRule(
                                 @"Rule for ARK SA (Created by ASCT)",
                                 FirewallAction.Allow,
-                                ((ASCTConfiguration)Application.Current.Properties["globalConfig"]).ExecutablePath
+                                targetServer.EXEPath
                             );
                             rule.Direction = FirewallDirection.Inbound;
                             FirewallManager.Instance.Rules.Add(rule);
@@ -87,7 +139,7 @@ namespace ARKServerCreationTool
                         catch (Exception)
                         {
                             MessageBox.Show($"ASCT was unable to create the firewall rule. \n" +
-                                $"You may be unable to connect to the service remotely ", "Error creating Firewall Rule");
+                                $"You may be unable to connect to the server remotely ", "Error creating Firewall Rule");
                         }
                     }
                 }
@@ -96,13 +148,14 @@ namespace ARKServerCreationTool
             }
             catch (Exception e)
             {
+                gameProcess = null;
                 MessageBox.Show(e.Message + Environment.NewLine + e.StackTrace);
                 return false;
             }            
         }
 
 
-        public static bool Stop()
+        public bool Stop()
         {
             int tries = 0;
             int maxTries = 5;

@@ -16,21 +16,39 @@ namespace ARKServerCreationTool
         private void Application_Startup(object sender, StartupEventArgs e)
         {
             bool newConfig = false;
-            ASCTConfiguration config = ASCTConfiguration.LoadConfig();
 
-            if (newConfig = (config == null)) config = new ASCTConfiguration();
-            Current.Properties["globalConfig"] = config;
+            if (newConfig = (ASCTGlobalConfig.Instance == null))
+            {
+                ASCTGlobalConfig.NewConfig();
+                ASCTConfiguration legacyConfig = ASCTConfiguration.LoadConfig();
+                if (legacyConfig != null)
+                {
+                    ASCTGlobalConfig.Instance.AutomaticallyCreateFirewallRule = legacyConfig.AutomaticallyCreateFirewallRule;
+
+                    ASCTServerConfig legacyServer = new ASCTServerConfig(ASCTGlobalConfig.Instance.NextAvailableID(), ASCTGlobalConfig.Instance.NextAvailablePort());
+                    legacyServer.IPAddress = legacyConfig.IPAddress;
+                    legacyServer.GamePort = legacyConfig.GamePort;
+                    legacyServer.GameDirectory = legacyConfig.GameDirectory;
+                    legacyServer.customLaunchArgs = legacyConfig.customLaunchArgs;
+                    legacyServer.useCustomLaunchArgs = legacyConfig.useCustomLaunchArgs;
+                    legacyServer.UseMultihome = legacyConfig.UseMultihome;
+
+                    ASCTGlobalConfig.Instance.Servers.Add(legacyServer);
+
+                    MessageBox.Show("Existing settings have been imported to the new format successfully");
+                }
+            }
 
             if (newConfig)
             {
-                ConfigurationWindow configWindow = new ConfigurationWindow(true);
+                ASCTConfigWindow configWindow = new ASCTConfigWindow(true);
                 configWindow.Show();
             }
             else
             {
-                MainWindow main = new MainWindow();
+                ServerList list = new ServerList();
 
-                main.Show();
+                list.Show();
             }
         }
     }

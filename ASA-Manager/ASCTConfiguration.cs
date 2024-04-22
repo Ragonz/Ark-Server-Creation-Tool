@@ -11,6 +11,10 @@ using System.Windows.Forms;
 
 namespace ARKServerCreationTool
 {
+
+    /// <summary>
+    /// Legacy config
+    /// </summary>
     public class ASCTConfiguration
     {
         [JsonIgnore]
