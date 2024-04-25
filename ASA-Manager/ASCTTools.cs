@@ -90,6 +90,23 @@ namespace ARKServerCreationTool
             }
         }
 
+        public static void FindOrCreateServerUpdaterWindow()
+        {
+            UpdaterWindow desiredWindow = null;
+
+            desiredWindow = Application.Current.Windows.OfType<UpdaterWindow>().FirstOrDefault();
+
+            if (desiredWindow != null)
+            {
+                desiredWindow.Activate();
+            }
+            else
+            {
+                desiredWindow = new UpdaterWindow();
+                desiredWindow.Show();
+            }
+        }
+
         public enum RunButtonStatus
         {
             Unknown, Run, Stop

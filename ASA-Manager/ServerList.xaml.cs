@@ -217,6 +217,18 @@ namespace ARKServerCreationTool
                 e.Cancel = true;
             }
         }
+
+        private void btn_openUpdater_Click(object sender, RoutedEventArgs e)
+        {
+            if (dg_ServerList.SelectedItem == null)
+            {
+                FindOrCreateServerUpdaterWindow();
+            }
+            else
+            {
+                FindOrCreateServerUpdaterWindow(((ASCTServerConfig)dg_ServerList.SelectedItem).ID);
+            }
+        }
     }
 }
 

@@ -5,14 +5,14 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:ARKServerCreationTool"
         mc:Ignorable="d"
-        Title="ASCT - Updater" Height="450" Width="800">
+        Title="ASCT - Updater" Height="450" Width="800" MinHeight="450" MinWidth="800" Activated="Window_Activated">
     <Grid>
         <Label Content="Updater" Margin="10,10,0,0" VerticalAlignment="Top" FontSize="16" HorizontalAlignment="Left" Width="68"/>
-        <Button x:Name="btn_runUpdate" Content="Update Game Files" Margin="0,0,10,10" Height="52" VerticalAlignment="Bottom" HorizontalAlignment="Right" Width="160" Click="btn_runUpdate_Click"/>
+        <Button x:Name="btn_runUpdate" Content="Update Game Files" IsEnabled="False" Margin="320,0,320,10" Click="btn_runUpdate_Click" Height="52" VerticalAlignment="Bottom"/>
         <ScrollViewer x:Name="ConsoleScrollViewer" Margin="10,0,10,67" VerticalScrollBarVisibility="Auto" Background="Black" Height="128" VerticalAlignment="Bottom">
             <TextBlock x:Name="txt_updateConsole" Foreground="White" Width="770" />
         </ScrollViewer>
-        <DataGrid x:Name="dg_updatableServers" Margin="10,46,10,200" AutoGenerateColumns="False" SelectionMode="Extended">
+        <DataGrid x:Name="dg_updatableServers" Margin="10,46,10,200" AutoGenerateColumns="False" SelectionMode="Extended" SelectionChanged="dg_updatableServers_SelectionChanged">
             <DataGrid.Columns>
                 <DataGridTextColumn Header="Name" Binding="{Binding serverName}" Width="*" />
                 <DataGridTextColumn Header="Cluster" Binding="{Binding serverCluster}" Width="*" />
@@ -20,5 +20,6 @@
             </DataGrid.Columns>
         </DataGrid>
         <Label Content="Update muiltiple servers at once" Margin="78,10,0,0" VerticalAlignment="Top" FontSize="16" Foreground="Gray" HorizontalAlignment="Left" VerticalContentAlignment="Center" Width="707" Height="31"/>
+        <CheckBox x:Name="chk_validate" Content="Validate Game Files" ToolTip="Validating game files means the updater will check every file is present and correct. Unticking this, the updater will only download changes from the last installed version, regardless of whether your files are correct or not" Margin="0,0,74,28" HorizontalAlignment="Right" Width="241" Height="15" VerticalAlignment="Bottom"/>
     </Grid>
 </Window>

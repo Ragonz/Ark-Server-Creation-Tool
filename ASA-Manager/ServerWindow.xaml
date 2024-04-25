@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:ARKServerCreationTool"
         mc:Ignorable="d"
-        Title="Ark Server Creation Tool" Height="201" MinWidth="520" Width="520" Activated="Window_Activated">
+        Title="Ark Server Creation Tool" ResizeMode="NoResize" Height="201" MinHeight="201" MaxHeight="201" MinWidth="520" MaxWidth="520" Width="520"  Activated="Window_Activated">
     <Grid>
         <Button x:Name="btn_openUpdater" Content="Open Updater" Margin="0,10,158,0" VerticalAlignment="Top" Height="29" Click="btn_openUpdater_Click" HorizontalAlignment="Right" Width="124"/>
         <Button x:Name="btn_openConfig" Content="Server Configuration" HorizontalAlignment="Right" Margin="0,10,10,0" VerticalAlignment="Top" Height="29" Width="143" Click="btn_openConfig_Click"/>

@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:ARKServerCreationTool"
         mc:Ignorable="d"
-        Title="ASCT - Server Configuration" Height="516" MinHeight="320" Width="500"  MinWidth="500" >
+        Title="ASCT - Server Configuration" Height="516" MinHeight="516" Width="520"  MinWidth="520" >
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="51*" MaxHeight="51" MinHeight="51"/>
@@ -15,7 +15,7 @@
         <Button x:Name="btn_save" Content="Save" Margin="0,10,10,10" Click="btn_save_Click" HorizontalAlignment="Right" Width="135"/>
         <Grid Grid.Row="1">
             <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="115" MaxWidth="162"/>
+                <ColumnDefinition Width="122" MaxWidth="162"/>
                 <ColumnDefinition/>
             </Grid.ColumnDefinitions>
             <Label Content="Server Name" Margin="10,10,0,0" VerticalAlignment="Top" Height="26" HorizontalContentAlignment="Right" />
@@ -26,17 +26,17 @@
             <Label Content="Map" Margin="10,72,0,0" VerticalAlignment="Top" Height="26" HorizontalContentAlignment="Right"/>
             <Button x:Name="btn_newMap" Grid.Column="1" Content="New Map..." Margin="0,72,10,0" VerticalAlignment="Top" HorizontalAlignment="Right" Width="104" Height="26" Click="btn_newMap_Click"/>
             <TextBox x:Name="txt_customMap" Grid.Column="1" Margin="10,72,119,0" TextWrapping="Wrap"  VerticalAlignment="Top" Height="26" Visibility="Collapsed"  VerticalContentAlignment="Center" FontSize="12" TextChanged="TextChanged"/>
-            <ComboBox x:Name="cmbo_Map" Grid.Column="1" Margin="10,72,119,0" VerticalAlignment="Top" Height="26" SelectionChanged="comboSelectionChanged"/>
+            <ComboBox x:Name="cmbo_Map" Grid.Column="1" Margin="10,72,119,0" VerticalAlignment="Top" Height="26" VerticalContentAlignment="Center" SelectionChanged="comboSelectionChanged"/>
             <Label Content="Cluster ID" Margin="10,103,0,0" VerticalAlignment="Top" Height="26" HorizontalContentAlignment="Right"/>
             <ComboBox x:Name="cmbo_clusterKey" Grid.Column="1" Margin="10,103,119,0" VerticalAlignment="Top" Height="26" SelectionChanged="comboSelectionChanged"/>
             <TextBox x:Name="txt_newClusterID" ToolTip="Enter a new cluster ID. This must be something unique amongst all ASA servers" Visibility="Collapsed" Grid.Column="1" Margin="10,103,119,0" TextWrapping="Wrap"  VerticalAlignment="Top" Height="26" VerticalContentAlignment="Center" FontSize="12" TextChanged="TextChanged"/>
             <Button x:Name="btn_newCluster" Grid.Column="1" Content="New Cluster..." Margin="0,103,10,0" VerticalAlignment="Top" HorizontalAlignment="Right" Width="104" Height="26" Click="btn_newCluster_Click"/>
             <Label Content="Main Game Port" Margin="10,134,0,0" VerticalAlignment="Top" Height="26" HorizontalContentAlignment="Right"/>
             <TextBox x:Name="txt_gamePort" Grid.Column="1" Margin="10,134,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Height="26" VerticalContentAlignment="Center" FontSize="12" TextChanged="TextChanged" HorizontalAlignment="Left" Width="80" PreviewTextInput="txt_gamePort_PreviewTextInput"/>
-            <Label Content="Command Line" Margin="10,0,0,10" HorizontalContentAlignment="Right" Height="63" VerticalAlignment="Bottom" VerticalContentAlignment="Center" />
-            <TextBox x:Name="txt_commandLine" IsEnabled="False" Grid.Column="1" Margin="10,0,10,10" TextWrapping="WrapWithOverflow" VerticalContentAlignment="Center" FontSize="12" Height="63" VerticalAlignment="Bottom"/>
-            <CheckBox x:Name="chkbx_overrideCommandline" Content="Manually define launch arguments" HorizontalAlignment="Left" Margin="10,0,0,78" Grid.Column="1" Height="15" VerticalAlignment="Bottom" Click="chkbx_overrideCommandline_Click"/>
-            <Label x:Name="lbl_invalidPort" Grid.Column="1" Content="⚠️ Invalid Value" HorizontalAlignment="Left" Margin="95,134,0,0" VerticalAlignment="Top" FontSize="10" Height="26" VerticalContentAlignment="Center"/>
+            <Label Content="Launch Arguments" Margin="10,0,0,10" HorizontalContentAlignment="Right" Height="63" VerticalAlignment="Bottom" VerticalContentAlignment="Center" />
+            <TextBox x:Name="txt_commandLine" IsEnabled="False" Grid.Column="1" Margin="10,376,10,0" TextWrapping="WrapWithOverflow" VerticalContentAlignment="Center" FontSize="12" Height="63" VerticalAlignment="Top"/>
+            <CheckBox x:Name="chkbx_overrideCommandline" Content="Manually define launch arguments" HorizontalAlignment="Left" Margin="10,0,0,78" Grid.Column="1" Height="15" VerticalAlignment="Bottom" Click="chkbx_overrideCommandline_Click" Width="203"/>
+            <Label x:Name="lbl_invalidPort" Grid.Column="1" Content="⚠️ Invalid Value" HorizontalAlignment="Left" Margin="95,134,0,0" VerticalAlignment="Top" FontSize="10" Height="26" VerticalContentAlignment="Center" Width="82"/>
             <Label Content="Mods" Margin="10,165,0,0" VerticalAlignment="Top" Height="155" HorizontalContentAlignment="Right" VerticalContentAlignment="Center"/>
             <ListBox x:Name="lst_modIds" Grid.Column="1" Margin="10,165,10,129" SelectionMode="Multiple" SelectionChanged="lst_modIds_SelectionChanged"/>
             <TextBox x:Name="txt_addMod" Grid.Column="1" Margin="10,0,119,98" TextWrapping="Wrap" VerticalAlignment="Bottom" Height="26" VerticalContentAlignment="Center" FontSize="12" TextChanged="TextChanged"/>

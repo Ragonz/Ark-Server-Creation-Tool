@@ -7,7 +7,7 @@
         mc:Ignorable="d"
         Title="ASCT - Servers" Height="411" Width="800" Activated="Window_Activated" Closing="Window_Closing">
     <Grid>
-        <DataGrid x:Name="dg_ServerList" Margin="10,46,10,46" IsReadOnly="True" AutoGenerateColumns="False" ItemsSource="{Binding}" FrozenColumnCount="1" SelectionChanged="dg_ServerList_SelectionChanged" SelectionMode="Single" >
+        <DataGrid x:Name="dg_ServerList" Margin="10,46,10,46" IsReadOnly="True" AutoGenerateColumns="False" FrozenColumnCount="1" SelectionChanged="dg_ServerList_SelectionChanged" SelectionMode="Single" >
             <DataGrid.Columns>
                 <DataGridTextColumn Header="Game Port" Binding="{Binding GamePort}" />
                 <DataGridTextColumn Header="Name" Binding="{Binding Name}" Width="200" />
@@ -24,5 +24,6 @@
         <Button x:Name="btn_run" Content="Start" Margin="0,0,116,10" RenderTransformOrigin="-0.588,-0.559" Click="btn_RunServer_Click" Height="31" VerticalAlignment="Bottom" IsEnabled="False" HorizontalAlignment="Right" Width="84"/>
         <Button x:Name="btn_startAll" Content="Start All" Margin="0,0,405,10" RenderTransformOrigin="-0.588,-0.559" Click="btn_startAll_Click" Height="31" VerticalAlignment="Bottom" IsEnabled="False" HorizontalAlignment="Right" Width="84" />
         <Button x:Name="btn_stopAll" Content="Stop All" Margin="0,0,316,10" RenderTransformOrigin="-0.588,-0.559" Click="btn_stopAll_Click" Height="31" VerticalAlignment="Bottom" IsEnabled="False" HorizontalAlignment="Right" Width="84" />
+        <Button x:Name="btn_openUpdater" Content="Open Updater" Margin="0,10,142,0" VerticalAlignment="Top" Height="31" Click="btn_openUpdater_Click" HorizontalAlignment="Right" Width="127"/>
     </Grid>
 </Window>

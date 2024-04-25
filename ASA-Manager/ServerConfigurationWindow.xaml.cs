@@ -239,7 +239,8 @@ namespace ARKServerCreationTool
             if (ulong.TryParse(txt_addMod.Text, out modID))
             {
                 targetServer.modIDs.Add(modID);
-                UpdateModList();                
+                UpdateModList();
+                txt_addMod.Clear();
             }
             else
             {
@@ -258,6 +259,11 @@ namespace ARKServerCreationTool
             targetServer.modIDs.RemoveWhere(x => lst_modIds.SelectedItems.Cast<ulong>().Contains(x));
             UpdateModList();
             UpdateCommandLineBox();
+
+        }
+
+        private void chkbx_overrideCommandline_Checked(object sender, RoutedEventArgs e)
+        {
 
         }
     }

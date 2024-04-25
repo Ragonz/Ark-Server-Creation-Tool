@@ -36,16 +36,44 @@ namespace ARKServerCreationTool
         {
             InitializeComponent();
 
+            UpdateUI(preselectServerIDs);
+        }
+
+        private void Window_Activated(object sender, EventArgs e)
+        {
+            UpdateUI();
+        }
+
+        private void UpdateUI(HashSet<int> preselectServerIDs = null)
+        {
             RefreshUpdateableServerList(preselectServerIDs);
 
-            btn_runUpdate.IsEnabled = !IsUpdating;
+            UpdateButtons();
+        }
+
+        private void UpdateButtons()
+        {
+            btn_runUpdate.IsEnabled = !IsUpdating && dg_updatableServers.SelectedItems.Count > 0;
             txt_updateConsole.Text = updateLog;
+            chk_validate.IsChecked = config.validateUpdates;
         }
 
         private static bool IsUpdating => updateTask != null && updateTask.Status is TaskStatus.Running or TaskStatus.WaitingToRun;
 
         private void RefreshUpdateableServerList(HashSet<int> preselectServerIDs = null)
         {
+            if (dg_updatableServers.SelectedItems != null)
+            {
+                if (preselectServerIDs == null)
+                {
+                    preselectServerIDs = new HashSet<int>();
+                }
+                for (int i = 0; i < dg_updatableServers.SelectedItems.Count; i++)
+                {
+                    preselectServerIDs.Add(((UpdatableServerListEntry)dg_updatableServers.SelectedItems[i]).targetServerID);
+                }
+            }
+
             updatableServers.Clear();
 
             foreach (ASCTServerConfig item in config.Servers)
@@ -79,6 +107,12 @@ namespace ARKServerCreationTool
 
         private async void btn_runUpdate_Click(object sender, RoutedEventArgs e)
         {
+            if (config.validateUpdates != chk_validate.IsChecked.Value)
+            {
+                config.validateUpdates = chk_validate.IsChecked.Value;
+                config.Save();
+            }
+
             if (updateTask == null || updateTask.Status is not TaskStatus.Running or TaskStatus.WaitingToRun)
             {
                 HashSet<int> serverIDsToUpdate = dg_updatableServers.SelectedItems.Cast<UpdatableServerListEntry>().Select(s => s.targetServerID).ToHashSet();
@@ -168,7 +202,7 @@ namespace ARKServerCreationTool
             ProcessStartInfo startInfo = new ProcessStartInfo
             {
                 FileName = depotDownloaderExePath,
-                Arguments = $"-app {config.serverAppID} -dir {targetServer.GameDirectory} -validate",
+                Arguments = $"-app {config.serverAppID} -dir {targetServer.GameDirectory} {(config.validateUpdates ? "-validate" : string.Empty)}",
                 RedirectStandardOutput = false,
                 CreateNoWindow = false,
                 UseShellExecute = false
@@ -199,6 +233,11 @@ namespace ARKServerCreationTool
                 txt_updateConsole.Text = updateLog;
                 ConsoleScrollViewer.ScrollToBottom();
             });
+        }
+
+        private void dg_updatableServers_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            UpdateButtons();
         }
     }
 
