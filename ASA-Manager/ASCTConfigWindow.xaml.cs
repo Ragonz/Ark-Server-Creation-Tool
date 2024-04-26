@@ -31,6 +31,7 @@ namespace ARKServerCreationTool
             txt_defaultPort.Text = ASCTGlobalConfig.Instance.StartingGamePort.ToString();
             txt_portIncrement.Text = ASCTGlobalConfig.Instance.PortIncrement.ToString();
             chk_autoFirewallRules.IsChecked = ASCTGlobalConfig.Instance.AutomaticallyCreateFirewallRule;
+            txt_clusterDir.Text = ASCTGlobalConfig.Instance.GlobalClusterDir;
 
             this.firstLaunch = firstLaunch;
         }
@@ -43,6 +44,7 @@ namespace ARKServerCreationTool
             ASCTGlobalConfig.Instance.StartingGamePort = ushort.Parse(txt_defaultPort.Text.Trim());
             ASCTGlobalConfig.Instance.PortIncrement = ushort.Parse(txt_portIncrement.Text.Trim());
             ASCTGlobalConfig.Instance.AutomaticallyCreateFirewallRule = chk_autoFirewallRules.IsChecked.Value;
+            ASCTGlobalConfig.Instance.GlobalClusterDir = txt_clusterDir.Text;
 
             ASCTGlobalConfig.Instance.Save();
 
@@ -98,6 +100,21 @@ namespace ARKServerCreationTool
             Regex regex = new Regex("[0-9]+");
            
            e.Handled = !regex.IsMatch(e.Text);
+        }
+
+        private void btn_clusterDirBrowse_Click(object sender, RoutedEventArgs e)
+        {
+            using (var dialog = new System.Windows.Forms.FolderBrowserDialog())
+            {
+                dialog.InitialDirectory = txt_clusterDir.Text;
+
+                System.Windows.Forms.DialogResult result = dialog.ShowDialog();
+
+                if (result == System.Windows.Forms.DialogResult.OK)
+                {
+                    txt_clusterDir.Text = dialog.SelectedPath;
+                }
+            }
         }
     }
 }

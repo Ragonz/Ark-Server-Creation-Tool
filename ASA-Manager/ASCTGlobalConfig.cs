@@ -103,8 +103,8 @@ namespace ARKServerCreationTool
         public ASCTServerConfig(int ID, ushort GamePort)
         {
             this.ID = ID;
-            this.Name = ID.ToString();
-            this.GameDirectory = ID.ToString();
+            this.Name = $"ASA Server {ID}";
+            this.GameDirectory = $"ASA Server {ID}";
             this.GamePort = GamePort;
         }
 

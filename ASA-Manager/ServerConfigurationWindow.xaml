@@ -34,7 +34,7 @@
             <Label Content="Main Game Port" Margin="10,134,0,0" VerticalAlignment="Top" Height="26" HorizontalContentAlignment="Right"/>
             <TextBox x:Name="txt_gamePort" Grid.Column="1" Margin="10,134,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Height="26" VerticalContentAlignment="Center" FontSize="12" TextChanged="TextChanged" HorizontalAlignment="Left" Width="80" PreviewTextInput="txt_gamePort_PreviewTextInput"/>
             <Label Content="Launch Arguments" Margin="10,0,0,10" HorizontalContentAlignment="Right" Height="63" VerticalAlignment="Bottom" VerticalContentAlignment="Center" />
-            <TextBox x:Name="txt_commandLine" IsEnabled="False" Grid.Column="1" Margin="10,376,10,0" TextWrapping="WrapWithOverflow" VerticalContentAlignment="Center" FontSize="12" Height="63" VerticalAlignment="Top"/>
+            <TextBox x:Name="txt_commandLine" IsEnabled="False" Grid.Column="1" Margin="10,0,10,10" TextWrapping="WrapWithOverflow" VerticalContentAlignment="Center" FontSize="12" Height="63" VerticalAlignment="Bottom"/>
             <CheckBox x:Name="chkbx_overrideCommandline" Content="Manually define launch arguments" HorizontalAlignment="Left" Margin="10,0,0,78" Grid.Column="1" Height="15" VerticalAlignment="Bottom" Click="chkbx_overrideCommandline_Click" Width="203"/>
             <Label x:Name="lbl_invalidPort" Grid.Column="1" Content="⚠️ Invalid Value" HorizontalAlignment="Left" Margin="95,134,0,0" VerticalAlignment="Top" FontSize="10" Height="26" VerticalContentAlignment="Center" Width="82"/>
             <Label Content="Mods" Margin="10,165,0,0" VerticalAlignment="Top" Height="155" HorizontalContentAlignment="Right" VerticalContentAlignment="Center"/>

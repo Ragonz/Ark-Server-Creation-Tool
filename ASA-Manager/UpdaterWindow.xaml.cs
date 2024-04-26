@@ -202,7 +202,7 @@ namespace ARKServerCreationTool
             ProcessStartInfo startInfo = new ProcessStartInfo
             {
                 FileName = depotDownloaderExePath,
-                Arguments = $"-app {config.serverAppID} -dir {targetServer.GameDirectory} {(config.validateUpdates ? "-validate" : string.Empty)}",
+                Arguments = $"-app {config.serverAppID} -dir \"{targetServer.GameDirectory}\" {(config.validateUpdates ? "-validate" : string.Empty)}",
                 RedirectStandardOutput = false,
                 CreateNoWindow = false,
                 UseShellExecute = false

@@ -51,8 +51,8 @@ namespace ARKServerCreationTool
 
             InitializeComponent();
 
-            lbl_serverName.Content = $"Server: {targetServer.Name}";
-            lbl_serverCluster.Content = $"Cluster: {(targetServer.ClusterKey != string.Empty ? targetServer.ClusterKey : "Not Clustered")}";
+            lbl_serverName.Content = $"{targetServer.Name}";
+            lbl_serverCluster.Content = $"{(targetServer.ClusterKey != string.Empty ? targetServer.ClusterKey : "Not Clustered")}";
 
             UpdateStatus();
         }

@@ -5,19 +5,22 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:ARKServerCreationTool"
         mc:Ignorable="d"
-        Title="ASCT - Global Configuration" Height="237" Width="637" MinWidth="586"  MinHeight="237" MaxHeight="237"
+        Title="ASCT - Global Configuration" Height="237" Width="707" MinWidth="586"  MinHeight="237" MaxHeight="237"
         Closing="WindowClose">
     <Grid>
         <Label Content="ASCT Configuration" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="10,10,0,0" FontSize="16"/>
-        <Label Content="Install Folder" HorizontalAlignment="Left" Margin="20,48,0,0" VerticalAlignment="Top"/>
-        <TextBox x:Name="txt_InstallPath" Margin="103,48,113,0" VerticalAlignment="Top" Height="26" VerticalContentAlignment="Center"/>
+        <Label Content="Install Folder" HorizontalAlignment="Left" Margin="43,48,0,0" VerticalAlignment="Top"/>
+        <TextBox x:Name="txt_InstallPath" Margin="126,48,113,0" VerticalAlignment="Top" Height="26" VerticalContentAlignment="Center"/>
         <Button x:Name="btn_saveConfig" Content="Save Config" Margin="0,10,10,0" Height="31" VerticalAlignment="Top" Click="btn_saveConfig_Click" HorizontalAlignment="Right" Width="117"/>
         <Button x:Name="btn_gameDirBrowse" Content="Browse" Margin="0,48,10,0" Height="26" VerticalAlignment="Top" Click="btn_gameDirBrowse_Click" HorizontalAlignment="Right" Width="98"/>
         <Label Content="" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="299,128,0,0" Foreground="#FF6D6D6D"/>
-        <CheckBox x:Name="chk_autoFirewallRules" Content="Automatically create firewall rules" HorizontalAlignment="Left" Margin="103,141,0,0" VerticalAlignment="Top"/>
-        <Label Content="Default Port" HorizontalAlignment="Left" Margin="25,79,0,0" VerticalAlignment="Top"/>
-        <TextBox x:Name="txt_defaultPort" Margin="103,79,0,0" VerticalAlignment="Top" Height="26" VerticalContentAlignment="Center" HorizontalAlignment="Left" Width="112"/>
-        <Label Content="Port Increment" HorizontalAlignment="Left" Margin="10,110,0,0" VerticalAlignment="Top"/>
-        <TextBox x:Name="txt_portIncrement" Margin="103,110,0,0" VerticalAlignment="Top" Height="26" VerticalContentAlignment="Center" HorizontalAlignment="Left" Width="112"/>
+        <CheckBox x:Name="chk_autoFirewallRules" Content="Automatically create firewall rules" HorizontalAlignment="Left" Margin="126,172,0,0" VerticalAlignment="Top"/>
+        <Label Content="Default Port" HorizontalAlignment="Left" Margin="43,110,0,0" VerticalAlignment="Top"/>
+        <TextBox x:Name="txt_defaultPort" Margin="126,110,0,0" VerticalAlignment="Top" Height="26" VerticalContentAlignment="Center" HorizontalAlignment="Left" Width="112"/>
+        <Label Content="Port Increment" HorizontalAlignment="Left" Margin="32,141,0,0" VerticalAlignment="Top"/>
+        <TextBox x:Name="txt_portIncrement" Margin="126,141,0,0" VerticalAlignment="Top" Height="26" VerticalContentAlignment="Center" HorizontalAlignment="Left" Width="112"/>
+        <Label Content="Cluster Data Folder" HorizontalAlignment="Left" Margin="10,79,0,0" VerticalAlignment="Top"/>
+        <TextBox x:Name="txt_clusterDir" Margin="126,79,113,0" VerticalAlignment="Top" Height="26" VerticalContentAlignment="Center"/>
+        <Button x:Name="btn_clusterDirBrowse" Content="Browse" Margin="0,79,10,0" Height="26" VerticalAlignment="Top" Click="btn_clusterDirBrowse_Click" HorizontalAlignment="Right" Width="98"/>
     </Grid>
 </Window>

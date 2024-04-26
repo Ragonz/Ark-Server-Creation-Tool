@@ -5,14 +5,14 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:ARKServerCreationTool"
         mc:Ignorable="d"
-        Title="Ark Server Creation Tool" ResizeMode="NoResize" Height="201" MinHeight="201" MaxHeight="201" MinWidth="520" MaxWidth="520" Width="520"  Activated="Window_Activated">
+        Title="Ark Server Creation Tool" Height="201" MinHeight="201" MaxHeight="201" MinWidth="520"  Width="520"  Activated="Window_Activated">
     <Grid>
         <Button x:Name="btn_openUpdater" Content="Open Updater" Margin="0,10,158,0" VerticalAlignment="Top" Height="29" Click="btn_openUpdater_Click" HorizontalAlignment="Right" Width="124"/>
         <Button x:Name="btn_openConfig" Content="Server Configuration" HorizontalAlignment="Right" Margin="0,10,10,0" VerticalAlignment="Top" Height="29" Width="143" Click="btn_openConfig_Click"/>
         <Button x:Name="btn_openGUSConfig" Content="Open GUS.ini Config" Margin="0,45,158,0" VerticalAlignment="Top" Height="28" Click="btn_openGUSConfig_Click" HorizontalAlignment="Right" Width="124"/>
         <Button x:Name="btn_openGameINIConfig" Content="Open Game.ini Config" HorizontalAlignment="Right" Margin="0,44,10,0" VerticalAlignment="Top" Height="29" Width="143" Click="btn_openGameINIConfig_Click"/>
-        <Label x:Name="lbl_serverName" Content="Server: Server Name" Margin="10,10,347,0" VerticalAlignment="Top" FontSize="16" Padding="0"/>
-        <Label x:Name="lbl_serverCluster" Content="Cluster: Cluster Name" IsEnabled="False" Margin="10,31,347,0" VerticalAlignment="Top" Padding="0"/>
+        <Label x:Name="lbl_serverName" Content="Server: Server Name" Margin="10,10,287,0" VerticalAlignment="Top" FontSize="16" Padding="0"/>
+        <Label x:Name="lbl_serverCluster" Content="Cluster: Cluster Name" IsEnabled="False" Margin="10,31,287,0" VerticalAlignment="Top" Padding="0"/>
         <GroupBox Header="Process Controls" Margin="10,0,10,8" Height="72" VerticalAlignment="Bottom">
             <Grid>
                 <CheckBox x:Name="chk_entireCluster" Content="All Servers in Cluster?" HorizontalAlignment="Right" Width="221" Height="15" VerticalAlignment="Bottom" Margin="0,0,10,34" Click="chk_entireCluster_Click"/>
