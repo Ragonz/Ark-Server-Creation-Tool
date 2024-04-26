@@ -38,7 +38,7 @@ namespace ARKServerCreationTool
         [JsonIgnore]
         public string depotDownloaderFolder = "depotdownloader";
         [JsonIgnore]
-        public string depotDownloaderURL = @"https://github.com/SteamRE/DepotDownloader/releases/download/DepotDownloader_2.5.0/depotdownloader-2.5.0.zip";
+        public string depotDownloaderURL = @"https://github.com/SteamRE/DepotDownloader/releases/download/DepotDownloader_2.6.0/DepotDownloader-framework.zip";
         [JsonIgnore]
         public string depotDownloaderExe = "DepotDownloader.exe";
         [JsonIgnore]
