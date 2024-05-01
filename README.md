@@ -7,7 +7,11 @@ If you have any questions join the discord https://discord.gg/RspMUPqjaJ
 This tool will automate the downloading, installation and setup of your very own ASA server so you can host your own ASA server, just punch in the info it asks for and off you go.
 The tool right now is a very barebones application but is getting updated constantly to improve it
 
-Instructions on using this tool
+Requirements:
+ - .NET 7 (the tool itself, this will be updated to .NET 8 shortly)
+ - .NET 8 (downloader tool requires this)
+
+# Instructions on using this tool
 
 You will need a windows PC / Dedicated Server / VPS / VDS with a minimum of 15GB ram (preferably 20GB so you can build some bases & have a few players)
 A blank ARK SA server will take 10.6GB of ram so you need some space for people to build stuff
