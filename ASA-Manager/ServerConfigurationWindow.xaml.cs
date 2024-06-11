@@ -52,6 +52,7 @@ namespace ARKServerCreationTool
             ValidateGamePortString(txt_gamePort.Text = targetServer.GamePort.ToString());
             ValidateSlotString(txt_slots.Text = targetServer.Slots.ToString());
             chk_crossplay.IsChecked = targetServer.AllowCrossplay;
+            chk_noBattleye.IsChecked = targetServer.NoBattleye;
 
             UpdateClusterCombo();
             UpdateMapCombo();
@@ -156,6 +157,7 @@ namespace ARKServerCreationTool
             serv.Slots = ushort.Parse(txt_slots.Text);
             serv.modIDs = lst_modIds.Items.Cast<ulong>().ToHashSet();
             serv.AllowCrossplay = chk_crossplay.IsChecked.Value;
+            serv.NoBattleye = chk_noBattleye.IsChecked.Value;
             if (chkbx_overrideCommandline.IsChecked.Value) serv.customLaunchArgs = txt_commandLine.Text.Trim();
         }
 

@@ -131,6 +131,8 @@ namespace ARKServerCreationTool
         public bool useCustomLaunchArgs { get; set; } = false; //Whether to use the user provided launch arguments
         public string customLaunchArgs { get; set; } = string.Empty; //user provided launch arguments
 
+        public bool NoBattleye { get; set; } = false;
+
         public uint Slots { get; set; } = 70;
 
         public bool AllowCrossplay { get; set; } = false;
@@ -148,8 +150,17 @@ namespace ARKServerCreationTool
                 }
                 else
                 {
-                    return $"\"{Map}{MultihomeArgs}\" \"-port={GamePort}\" -WinLiveMaxPlayers={Slots}{ModArgs}{ClusterArgs}{CrossplayArgs} -log -servergamelog".Trim();
+                    return $"\"{Map}{MultihomeArgs}\" \"-port={GamePort}\" -WinLiveMaxPlayers={Slots}{ModArgs}{ClusterArgs}{CrossplayArgs}{NoBattleyeArgs} -log -servergamelog".Trim();
                 }
+            }
+        }
+
+        [JsonIgnore]
+        public string NoBattleyeArgs
+        {
+            get
+            {
+                return NoBattleye ? " -NoBattleEye" : string.Empty;
             }
         }
 
@@ -163,7 +174,7 @@ namespace ARKServerCreationTool
                     return string.Empty;
                 }
 
-                return $"\" -mods={string.Join(" ,", modIDs)}\"";
+                return $" \"-mods={string.Join(" ,", modIDs)}\"";
             }
         }
 
