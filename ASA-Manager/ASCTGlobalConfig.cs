@@ -46,7 +46,7 @@ namespace ARKServerCreationTool
         [JsonIgnore]
         public static readonly string[] maps = new string[]
         {
-            "TheIsland_WP", "ScorchedEarth_WP"
+            "TheIsland_WP", "ScorchedEarth_WP", "TheCenter_WP"
         };
 
         public string ServersInstallationPath { get; set; } = Path.Combine(Directory.GetCurrentDirectory(), "InstalledServers");
@@ -130,6 +130,8 @@ namespace ARKServerCreationTool
         public bool useCustomLaunchArgs { get; set; } = false; //Whether to use the user provided launch arguments
         public string customLaunchArgs { get; set; } = string.Empty; //user provided launch arguments
 
+        public uint Slots = 70;
+
         public HashSet<ulong> modIDs = new HashSet<ulong>();
 
         [JsonIgnore]
@@ -143,7 +145,7 @@ namespace ARKServerCreationTool
                 }
                 else
                 {
-                    return $"\"{Map}{MultihomeArgs}\" \"-port={GamePort}\" {ModArgs} {ClusterArgs}";
+                    return $"\"{Map}{MultihomeArgs}\" \"-port={GamePort}\" -WinLiveMaxPlayers={Slots} {ModArgs} {ClusterArgs} -log -servergamelog";
                 }
             }
         }

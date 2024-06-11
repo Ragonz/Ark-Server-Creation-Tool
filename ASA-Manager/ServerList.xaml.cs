@@ -32,6 +32,35 @@ namespace ARKServerCreationTool
         {
             InitializeComponent();
 
+            IEnumerable<string> missingCerts = CertificateManagement.GetMissingCertificates();
+
+            if (missingCerts.Any()) 
+            {
+                DialogResult result = System.Windows.Forms.MessageBox.Show(
+                    "The following certificates are missing: " + Environment.NewLine + Environment.NewLine +
+                    string.Join(Environment.NewLine, missingCerts) + Environment.NewLine + Environment.NewLine + 
+                    @"Some game features may not work without them, such as CurseForge mods. Would you like to install them?",
+                    "Install Missing Certificates?",
+                    MessageBoxButtons.YesNo,
+                    MessageBoxIcon.Question);
+
+                if (result == System.Windows.Forms.DialogResult.Yes)
+                {
+                    foreach (string cert in missingCerts)
+                    {
+                        try
+                        {
+                            CertificateManagement.InstallCertByName(cert);
+                        }
+                        catch (Exception ex)
+                        {
+                            System.Windows.Forms.MessageBox.Show(ex.ToString());
+                            throw;
+                        }
+                    }
+                }
+            }
+
             UpdateList();
         }
 
@@ -99,11 +128,11 @@ namespace ARKServerCreationTool
 
             if (removeResult == MessageBoxResult.Yes)
             {
-                var deleteResult = System.Windows.MessageBox.Show("Would you like to permenantly delete the files for the server?", "Delete Files?", MessageBoxButton.YesNoCancel);
+                var deleteResult = System.Windows.MessageBox.Show("Would you like to permanently delete the files for the server?", "Delete Files?", MessageBoxButton.YesNoCancel);
 
                 if (deleteResult == MessageBoxResult.Cancel)
                 {
-                    return; //Do nothing, user canceled on the second prompt
+                    return; //Do nothing, user cancelled on the second prompt
                 }
 
                 string path = ((ASCTServerConfig)dg_ServerList.SelectedItem).GameDirectory;

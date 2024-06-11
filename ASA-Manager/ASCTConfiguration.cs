@@ -22,7 +22,7 @@ namespace ARKServerCreationTool
         [JsonIgnore]
         public const string relativeEXEPath = @"ShooterGame\Binaries\Win64\ArkAscendedServer.exe";
         [JsonIgnore]
-        public  string depotDownloaderFolder = "depotdownloader";
+        public  string depotDownloaderFolder = "DepotDownloader";
         [JsonIgnore]
         public  string depotDownloaderURL = @"https://github.com/SteamRE/DepotDownloader/releases/download/DepotDownloader_2.5.0/depotdownloader-2.5.0.zip";
         [JsonIgnore]

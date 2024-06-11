@@ -50,6 +50,7 @@ namespace ARKServerCreationTool
             txt_commandLine.IsEnabled = targetServer.useCustomLaunchArgs;
             txt_commandLine.Text = targetServer.LaunchArguments;
             ValidateGamePortString(txt_gamePort.Text = targetServer.GamePort.ToString());
+            ValidateSlotString(txt_slots.Text = targetServer.Slots.ToString());
 
             UpdateClusterCombo();
             UpdateMapCombo();
@@ -140,7 +141,7 @@ namespace ARKServerCreationTool
 
         private void UpdateServerObject(ref ASCTServerConfig serv)
         {
-            if (!ValidateGamePortString(txt_gamePort.Text))
+            if (!ValidateGamePortString(txt_gamePort.Text) || !ValidateSlotString(txt_slots.Text))
             {
                 return;
             }
@@ -151,6 +152,7 @@ namespace ARKServerCreationTool
             serv.Map = cmbo_Map.Visibility == Visibility.Visible ? (string)cmbo_Map.SelectedItem : txt_customMap.Text.Trim();
             serv.useCustomLaunchArgs = chkbx_overrideCommandline.IsChecked.Value;
             serv.GamePort = ushort.Parse(txt_gamePort.Text);
+            serv.Slots = ushort.Parse(txt_slots.Text);
             serv.modIDs = lst_modIds.Items.Cast<ulong>().ToHashSet();
             if (chkbx_overrideCommandline.IsChecked.Value) serv.customLaunchArgs = txt_commandLine.Text.Trim();
         }
@@ -212,9 +214,23 @@ namespace ARKServerCreationTool
             return valid;
         }
 
+        private bool ValidateSlotString(string slotString) 
+        {
+            bool valid = ushort.TryParse(slotString, out _) && numberRegex.Match(slotString).Success;
+
+            lbl_invalidSlots.Visibility = valid ? Visibility.Collapsed : Visibility.Visible;
+
+            return valid;
+        }
+
         private void txt_gamePort_PreviewTextInput(object sender, TextCompositionEventArgs e)
         {
-            e.Handled = !ValidateGamePortString(txt_gamePort.Text + e.Text);
+            e.Handled = !ValidateGamePortString(((TextBox)sender).Text + e.Text);
+        }
+
+        private void txt_slot_PreviewTextInput(object sender, TextCompositionEventArgs e)
+        {
+            e.Handled = !ValidateSlotString(((TextBox)sender).Text + e.Text);
         }
 
         private void btn_browse_Click(object sender, RoutedEventArgs e)
