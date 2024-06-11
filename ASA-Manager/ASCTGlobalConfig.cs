@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
+using System.Windows.Forms;
 
 namespace ARKServerCreationTool
 {
@@ -130,7 +131,9 @@ namespace ARKServerCreationTool
         public bool useCustomLaunchArgs { get; set; } = false; //Whether to use the user provided launch arguments
         public string customLaunchArgs { get; set; } = string.Empty; //user provided launch arguments
 
-        public uint Slots = 70;
+        public uint Slots { get; set; } = 70;
+
+        public bool AllowCrossplay { get; set; } = false;
 
         public HashSet<ulong> modIDs = new HashSet<ulong>();
 
@@ -145,7 +148,7 @@ namespace ARKServerCreationTool
                 }
                 else
                 {
-                    return $"\"{Map}{MultihomeArgs}\" \"-port={GamePort}\" -WinLiveMaxPlayers={Slots} {ModArgs} {ClusterArgs} -log -servergamelog";
+                    return $"\"{Map}{MultihomeArgs}\" \"-port={GamePort}\" -WinLiveMaxPlayers={Slots}{ModArgs}{ClusterArgs}{CrossplayArgs} -log -servergamelog".Trim();
                 }
             }
         }
@@ -160,7 +163,7 @@ namespace ARKServerCreationTool
                     return string.Empty;
                 }
 
-                return $"\"-mods={string.Join(" ,", modIDs)}\"";
+                return $"\" -mods={string.Join(" ,", modIDs)}\"";
             }
         }
 
@@ -174,7 +177,7 @@ namespace ARKServerCreationTool
                     return string.Empty;
                 }
 
-                return $"\"-clusterid={ClusterKey}\" \"-ClusterDirOverride={ASCTGlobalConfig.Instance.GlobalClusterDir}\"";
+                return $" \"-clusterid={ClusterKey}\" \"-ClusterDirOverride={ASCTGlobalConfig.Instance.GlobalClusterDir}\"";
             }
         }
 
@@ -192,6 +195,15 @@ namespace ARKServerCreationTool
                 {
                     return string.Empty;
                 }
+            }
+        }
+
+        [JsonIgnore]
+        public string CrossplayArgs
+        {
+            get
+            {
+                return AllowCrossplay ? " -ServerPlatform=ALL" : string.Empty;
             }
         }
     }

@@ -51,6 +51,7 @@ namespace ARKServerCreationTool
             txt_commandLine.Text = targetServer.LaunchArguments;
             ValidateGamePortString(txt_gamePort.Text = targetServer.GamePort.ToString());
             ValidateSlotString(txt_slots.Text = targetServer.Slots.ToString());
+            chk_crossplay.IsChecked = targetServer.AllowCrossplay;
 
             UpdateClusterCombo();
             UpdateMapCombo();
@@ -154,6 +155,7 @@ namespace ARKServerCreationTool
             serv.GamePort = ushort.Parse(txt_gamePort.Text);
             serv.Slots = ushort.Parse(txt_slots.Text);
             serv.modIDs = lst_modIds.Items.Cast<ulong>().ToHashSet();
+            serv.AllowCrossplay = chk_crossplay.IsChecked.Value;
             if (chkbx_overrideCommandline.IsChecked.Value) serv.customLaunchArgs = txt_commandLine.Text.Trim();
         }
 
@@ -278,9 +280,9 @@ namespace ARKServerCreationTool
 
         }
 
-        private void chkbx_overrideCommandline_Checked(object sender, RoutedEventArgs e)
+        private void chk_crossplay_Checked(object sender, RoutedEventArgs e)
         {
-
+            UpdateCommandLineBox();
         }
     }
 }
