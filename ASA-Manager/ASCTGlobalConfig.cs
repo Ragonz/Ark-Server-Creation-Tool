@@ -160,7 +160,7 @@ namespace ARKServerCreationTool
         {
             get
             {
-                return NoBattleye ? " -NoBattleEye" : string.Empty;
+                return NoBattleye ? " -NoBattlEye" : string.Empty;
             }
         }
 
