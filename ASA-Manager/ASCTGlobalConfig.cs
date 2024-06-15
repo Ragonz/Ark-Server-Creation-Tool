@@ -174,7 +174,7 @@ namespace ARKServerCreationTool
                     return string.Empty;
                 }
 
-                return $" \"-mods={string.Join(" ,", modIDs)}\"";
+                return $" \"-mods={string.Join(",", modIDs)}\"";
             }
         }
 
