@@ -152,16 +152,27 @@ namespace ARKServerCreationTool
 
             WriteToUpdateOutput($"Updating {serverIDsToUpdate.Count} servers");
             int i = 0;
+            int erroredUpdates = 0;
             foreach (int serverID in serverIDsToUpdate)
             {
                 i++;
                 WriteToUpdateOutput($"Updating server {i} of {serverIDsToUpdate.Count}");
-                UpdateSingleServer(serverID);
+                int updaterExitCode = UpdateSingleServer(serverID);
+
+                if (updaterExitCode != 0)
+                {
+                    erroredUpdates++;
+                }
             }
+
             WriteToUpdateOutput($"Finished updating servers");
+            if (erroredUpdates > 0)
+            {
+                WriteToUpdateOutput("Some servers may have failed to update. Please check the above log.");
+            }
         }
 
-        private void UpdateSingleServer(int targetServerID, bool downloadDepotDownloader = false)
+        private int UpdateSingleServer(int targetServerID, bool downloadDepotDownloader = false)
         {
             string depotDownloaderExePath = Path.Combine(config.depotDownloaderFolder, config.depotDownloaderExe);
             if (!File.Exists(depotDownloaderExePath))
@@ -183,7 +194,6 @@ namespace ARKServerCreationTool
                 }
             }
 
-
             ASCTServerConfig targetServer = config.Servers.Where(s => s.ID == targetServerID).FirstOrDefault();
 
             WriteToUpdateOutput($"Updating: \"{targetServer.Name}\" in {targetServer.GameDirectory} ");
@@ -199,7 +209,8 @@ namespace ARKServerCreationTool
                 WriteToUpdateOutput($"Server stopped.");
             }
 
-            ProcessStartInfo startInfo = new ProcessStartInfo
+            Process updateProcess = new Process();
+            updateProcess.StartInfo = new ProcessStartInfo
             {
                 FileName = depotDownloaderExePath,
                 Arguments = $"-app {config.serverAppID} -dir \"{targetServer.GameDirectory}\" {(config.validateUpdates ? "-validate" : string.Empty)}",
@@ -208,11 +219,13 @@ namespace ARKServerCreationTool
                 UseShellExecute = false
             };
 
-            Process p = new Process();
-            p.StartInfo = startInfo;
+            updateProcess.Start();
+            updateProcess.WaitForExit();
 
-            p.Start();
-            p.WaitForExit();
+            if (updateProcess.ExitCode != 0)
+            {
+                WriteToUpdateOutput($"Update may have failed, exit code: {updateProcess.ExitCode}");
+            }
 
             if (serverWasRunning)
             {
@@ -222,6 +235,8 @@ namespace ARKServerCreationTool
             }
 
             targetServer.ProcessManager.UnlockServer(serverLockId);
+
+            return updateProcess.ExitCode;
         }
 
         private void WriteToUpdateOutput(string message)
