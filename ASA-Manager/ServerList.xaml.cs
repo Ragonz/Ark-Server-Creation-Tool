@@ -126,31 +126,38 @@ namespace ARKServerCreationTool
         {
             var removeResult = System.Windows.MessageBox.Show("Are you sure you want to remove this server?", "Are you sure?", MessageBoxButton.YesNo);
 
-            if (removeResult == MessageBoxResult.Yes)
+            try
             {
-                var deleteResult = System.Windows.MessageBox.Show("Would you like to permanently delete the files for the server?", "Delete Files?", MessageBoxButton.YesNoCancel);
-
-                if (deleteResult == MessageBoxResult.Cancel)
+                if (removeResult == MessageBoxResult.Yes)
                 {
-                    return; //Do nothing, user cancelled on the second prompt
-                }
+                    var deleteResult = System.Windows.MessageBox.Show("Would you like to permanently delete the files for the server?", "Delete Files?", MessageBoxButton.YesNoCancel);
 
-                string path = ((ASCTServerConfig)dg_ServerList.SelectedItem).GameDirectory;
-
-                config.Servers.Remove(((ASCTServerConfig)dg_ServerList.SelectedItem)).ToString();
-                System.Windows.MessageBox.Show(config.Servers.Count.ToString());
-
-                config.Save();
-
-                if (deleteResult == MessageBoxResult.Yes)
-                {
-                    if (Directory.Exists(path))
+                    if (deleteResult == MessageBoxResult.Cancel)
                     {
-                        Directory.Delete(path, true);
+                        return; //Do nothing, user cancelled on the second prompt
                     }
-                }
 
-                UpdateList();
+                    string path = ((ASCTServerConfig)dg_ServerList.SelectedItem).GameDirectory;
+
+                    config.Servers.Remove(((ASCTServerConfig)dg_ServerList.SelectedItem)).ToString();
+
+                    config.Save();
+
+                    if (deleteResult == MessageBoxResult.Yes)
+                    {
+                        if (Directory.Exists(path))
+                        {
+                            Directory.Delete(path, true);
+                        }
+                    }
+
+                    UpdateList();
+                }
+            }
+            catch (Exception ex)
+            {
+                System.Windows.MessageBox.Show(ex.ToString());
+                throw;
             }
         }
 

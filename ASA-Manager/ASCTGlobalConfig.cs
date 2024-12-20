@@ -2,7 +2,6 @@
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
-using System.Windows.Forms;
 
 namespace ARKServerCreationTool
 {
@@ -47,7 +46,7 @@ namespace ARKServerCreationTool
         [JsonIgnore]
         public static readonly string[] maps = new string[]
         {
-            "TheIsland_WP", "ScorchedEarth_WP", "thecenter_wp", "Aberration_WP"
+            "TheIsland_WP", "ScorchedEarth_WP", "thecenter_wp", "Aberration_WP", "Extinction_WP"
         };
 
         public string ServersInstallationPath { get; set; } = Path.Combine(Directory.GetCurrentDirectory(), "InstalledServers");
@@ -120,6 +119,7 @@ namespace ARKServerCreationTool
         public string ClusterKey { get; set; } = string.Empty; //The cluster targetServerID 
 
         public string GameDirectory { get; set; } //Path to where the server is located
+        [JsonIgnore]
         public string EXEPath { get { return Path.Combine(GameDirectory, ASCTGlobalConfig.relativeEXEPath); } }
 
         public bool UseMultihome { get; set; } = false; //Whether the server should be launched with the MultihomeArgs argument
