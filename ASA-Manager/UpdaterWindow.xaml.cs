@@ -172,7 +172,7 @@ namespace ARKServerCreationTool
             }
         }
 
-        private int UpdateSingleServer(int targetServerID, bool downloadDepotDownloader = false)
+        private int UpdateSingleServer(int targetServerID)
         {
             string depotDownloaderExePath = Path.Combine(config.depotDownloaderFolder, config.depotDownloaderExe);
             if (!File.Exists(depotDownloaderExePath))
@@ -181,16 +181,7 @@ namespace ARKServerCreationTool
 
                 if (boxResult == MessageBoxResult.Yes)
                 {
-                    WriteToUpdateOutput("Downloading DepotDownloader");
-                    Directory.CreateDirectory(config.depotDownloaderFolder);
-
-                    string zipFilePath = Path.Combine(config.depotDownloaderFolder, "DepotDownloader.zip");
-                    using (WebClient wc = new WebClient())
-                    {
-                        wc.DownloadFile(config.depotDownloaderURL, zipFilePath);
-                    }
-                    WriteToUpdateOutput("Extracting DepotDownloader");
-                    ZipFile.ExtractToDirectory(zipFilePath, config.depotDownloaderFolder);
+                    DownloadAndExtractDepotDownloader();
                 }
             }
 
@@ -225,7 +216,18 @@ namespace ARKServerCreationTool
             if (updateProcess.ExitCode != 0)
             {
                 WriteToUpdateOutput($"Update may have failed, exit code: {updateProcess.ExitCode}");
+
+                MessageBoxResult boxResult = MessageBox.Show("DepotDownloader exited with an error code. Updating it may resolve this. Would you like to update it and try to update again?", "Updater exited with an error", MessageBoxButton.YesNo);
+
+                if (boxResult == MessageBoxResult.Yes)
+                {
+                    DownloadAndExtractDepotDownloader();
+
+                    UpdateSingleServer(targetServerID);
+                }
             }
+
+            targetServer.ProcessManager.UnlockServer(serverLockId);
 
             if (serverWasRunning)
             {
@@ -234,9 +236,12 @@ namespace ARKServerCreationTool
                 WriteToUpdateOutput($"Started server.");
             }
 
-            targetServer.ProcessManager.UnlockServer(serverLockId);
-
             return updateProcess.ExitCode;
+        }
+
+        private void DownloadAndExtractDepotDownloader()
+        {
+
         }
 
         private void WriteToUpdateOutput(string message)
