@@ -8,7 +8,7 @@ This tool will automate the downloading, installation and setup of your very own
 The tool right now is a very barebones application but is getting updated constantly to improve it
 
 Requirements:
- - .NET 8
+ - .NET 9
 
 # Instructions on using this tool
 
