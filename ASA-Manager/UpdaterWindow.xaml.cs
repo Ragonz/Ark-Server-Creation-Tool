@@ -241,7 +241,22 @@ namespace ARKServerCreationTool
 
         private void DownloadAndExtractDepotDownloader()
         {
+            WriteToUpdateOutput("Downloading DepotDownloader");
 
+            if (Directory.Exists(config.depotDownloaderFolder))
+            {
+                Directory.Delete(config.depotDownloaderFolder, true);
+            }
+
+            Directory.CreateDirectory(config.depotDownloaderFolder);
+
+            string zipFilePath = Path.Combine(config.depotDownloaderFolder, "DepotDownloader.zip");
+            using (WebClient wc = new WebClient())
+            {
+                wc.DownloadFile(config.depotDownloaderURL, zipFilePath);
+            }
+            WriteToUpdateOutput("Extracting DepotDownloader");
+            ZipFile.ExtractToDirectory(zipFilePath, config.depotDownloaderFolder);
         }
 
         private void WriteToUpdateOutput(string message)
