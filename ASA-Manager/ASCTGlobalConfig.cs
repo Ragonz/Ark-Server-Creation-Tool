@@ -107,10 +107,12 @@ namespace ARKServerCreationTool
             this.GameDirectory = $"ASA Server {ID}";
             this.GamePort = GamePort;
         }
-
+        
+        [JsonIgnore]
         internal GameProcessManager ProcessManager => GameProcessManager.GetGameProcessManager(this.ID);
-
+        [JsonIgnore]
         public bool IsRunning => ProcessManager.IsRunning;
+        [JsonIgnore]
         public string IsRunningToString => IsRunning ? "Running" : "Stopped";
 
         public int ID { get; private set; } //to be used as a primary key
