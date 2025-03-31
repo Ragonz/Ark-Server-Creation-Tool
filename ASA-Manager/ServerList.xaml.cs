@@ -139,7 +139,7 @@ namespace ARKServerCreationTool
 
                     string path = ((ASCTServerConfig)dg_ServerList.SelectedItem).GameDirectory;
 
-                    config.Servers.Remove(((ASCTServerConfig)dg_ServerList.SelectedItem)).ToString();
+                    config.Servers.Remove(((ASCTServerConfig)dg_ServerList.SelectedItem));
 
                     config.Save();
 
