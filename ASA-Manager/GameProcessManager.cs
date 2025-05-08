@@ -20,7 +20,7 @@ namespace ARKServerCreationTool
 
         public int targetServerID { get; private set; }
 
-        private ASCTServerConfig targetServer { get { return ASCTGlobalConfig.Instance.Servers[targetServerID]; } }
+        private ASCTServerConfig targetServer { get { return ASCTGlobalConfig.Instance.Servers.Where(s => s.ID == targetServerID).First(); } }
 
         private GameProcessManager(int targetServerID)
         {
