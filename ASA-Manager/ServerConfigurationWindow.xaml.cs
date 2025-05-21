@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
+using System.Net.NetworkInformation;
 using System.Text;
 using System.Text.RegularExpressions;
 using System.Threading.Tasks;
@@ -53,6 +54,9 @@ namespace ARKServerCreationTool
             ValidateSlotString(txt_slots.Text = targetServer.Slots.ToString());
             chk_crossplay.IsChecked = targetServer.AllowCrossplay;
             chk_noBattleye.IsChecked = targetServer.NoBattleye;
+            chk_useMultiHome.IsChecked = targetServer.UseMultihome;
+            txt_multiHomeIPaddress.IsEnabled = targetServer.UseMultihome;
+            txt_multiHomeIPaddress.Text = targetServer.IPAddress.ToString();
 
             UpdateClusterCombo();
             UpdateMapCombo();
@@ -120,6 +124,33 @@ namespace ARKServerCreationTool
                 }
             }
 
+            if (chk_useMultiHome.IsChecked.Value == true)
+            {
+                bool ipKnown = false;
+                string desiredIP = txt_multiHomeIPaddress.Text.Trim();
+
+                foreach (NetworkInterface netInterface in NetworkInterface.GetAllNetworkInterfaces())
+                {
+                    IPInterfaceProperties iPInterfaceProperties = netInterface.GetIPProperties();
+
+                    foreach (UnicastIPAddressInformation addr in iPInterfaceProperties.UnicastAddresses)
+                    {
+                        if (desiredIP.Equals(addr.Address.ToString())) { ipKnown = true; break; }
+                    }
+
+                    if (ipKnown) { break; }
+                }
+
+                if (!ipKnown)
+                {
+                    var result = MessageBox.Show($"The IP address you have entered is not configured on any interface on this machine: {Environment.NewLine}{desiredIP}{Environment.NewLine}The ARK server may fail to start, or may not work as expected.{Environment.NewLine}Are you sure you wish to continue?", "Are you sure?", MessageBoxButton.YesNo);
+                    if (result == MessageBoxResult.No)
+                    {
+                        return;
+                    }
+                }
+            }
+
             UpdateServerObject(ref targetServer);
 
             if (newServer)
@@ -158,6 +189,8 @@ namespace ARKServerCreationTool
             serv.modIDs = lst_modIds.Items.Cast<ulong>().ToHashSet();
             serv.AllowCrossplay = chk_crossplay.IsChecked.Value;
             serv.NoBattleye = chk_noBattleye.IsChecked.Value;
+            serv.UseMultihome = chk_useMultiHome.IsChecked.Value;
+            serv.IPAddress = txt_multiHomeIPaddress.Text.Trim();
             if (chkbx_overrideCommandline.IsChecked.Value) serv.customLaunchArgs = txt_commandLine.Text.Trim();
         }
 
@@ -284,6 +317,12 @@ namespace ARKServerCreationTool
 
         private void chk_crossplay_Checked(object sender, RoutedEventArgs e)
         {
+            UpdateCommandLineBox();
+        }
+
+        private void chk_useMultiHome_Checked(object sender, RoutedEventArgs e)
+        {
+            txt_multiHomeIPaddress.IsEnabled = chk_useMultiHome.IsChecked.Value;
             UpdateCommandLineBox();
         }
     }
