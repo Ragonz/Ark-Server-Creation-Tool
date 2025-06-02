@@ -139,6 +139,8 @@ namespace ARKServerCreationTool
 
         public bool AllowCrossplay { get; set; } = false;
 
+        public string ActiveEvent {  get; set; } = string.Empty;
+
         public HashSet<ulong> modIDs = new HashSet<ulong>();
 
         [JsonIgnore]
@@ -152,7 +154,7 @@ namespace ARKServerCreationTool
                 }
                 else
                 {
-                    return $"\"{Map}{MultihomeArgs}\" \"-port={GamePort}\" -WinLiveMaxPlayers={Slots}{ModArgs}{ClusterArgs}{CrossplayArgs}{NoBattleyeArgs} -log -servergamelog".Trim();
+                    return $"\"{Map}{MultihomeArgs}\" \"-port={GamePort}\" -WinLiveMaxPlayers={Slots}{ModArgs}{ClusterArgs}{CrossplayArgs}{NoBattleyeArgs}{ActiveEventArgs} -log -servergamelog".Trim();
                 }
             }
         }
@@ -217,6 +219,14 @@ namespace ARKServerCreationTool
             get
             {
                 return AllowCrossplay ? " -ServerPlatform=ALL" : string.Empty;
+            }
+        }
+        [JsonIgnore]
+        public string ActiveEventArgs
+        {
+            get
+            {
+                return !string.IsNullOrEmpty(ActiveEvent) ? $" -ActiveEvent={ActiveEvent}" : string.Empty;
             }
         }
     }

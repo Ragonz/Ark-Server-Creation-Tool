@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:ARKServerCreationTool"
         mc:Ignorable="d"
-        Title="ASCT - Server Configuration" Height="681" MinHeight="516" Width="520"  MinWidth="520" >
+        Title="ASCT - Server Configuration" Height="661" MinHeight="516" Width="520"  MinWidth="520" >
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="51*" MaxHeight="51" MinHeight="51"/>
@@ -37,8 +37,8 @@
             <TextBox x:Name="txt_commandLine" IsEnabled="False" Grid.Column="1" Margin="10,0,10,10" TextWrapping="WrapWithOverflow" VerticalContentAlignment="Center" FontSize="12" Height="63" VerticalAlignment="Bottom"/>
             <CheckBox x:Name="chkbx_overrideCommandline" Content="Manually define launch arguments" HorizontalAlignment="Left" Margin="10,0,0,78" Grid.Column="1" Height="15" VerticalAlignment="Bottom" Click="chkbx_overrideCommandline_Click" Width="203"/>
             <Label x:Name="lbl_invalidPort" Grid.Column="1" Content="⚠️ Invalid Value" HorizontalAlignment="Left" Margin="95,165,0,0" VerticalAlignment="Top" FontSize="10" Height="26" VerticalContentAlignment="Center" Width="82"/>
-            <Label Content="Mods" Margin="10,291,0,129" HorizontalContentAlignment="Right" VerticalContentAlignment="Center"/>
-            <ListBox x:Name="lst_modIds" Grid.Column="1" Margin="10,291,10,129" SelectionMode="Multiple" SelectionChanged="lst_modIds_SelectionChanged"/>
+            <Label Content="Mods" Margin="10,322,0,129" HorizontalContentAlignment="Right" VerticalContentAlignment="Center"/>
+            <ListBox x:Name="lst_modIds" Grid.Column="1" Margin="10,322,10,129" SelectionMode="Multiple" SelectionChanged="lst_modIds_SelectionChanged"/>
             <TextBox x:Name="txt_addMod" Grid.Column="1" Margin="10,0,119,98" TextWrapping="Wrap" VerticalAlignment="Bottom" Height="26" VerticalContentAlignment="Center" FontSize="12" TextChanged="TextChanged"/>
             <Button x:Name="btn_addMod" Grid.Column="1" Content="Add Mod" Margin="0,0,43,98" VerticalAlignment="Bottom" HorizontalAlignment="Right" Width="71" Height="26" Click="btn_addMod_Click"/>
             <Button x:Name="btn_removeMod" IsEnabled="False" ToolTip="Remove Selected Mod" Grid.Column="1" Content="🗑️" Margin="0,0,10,98" VerticalAlignment="Bottom" HorizontalAlignment="Right" Width="28" Height="26" RenderTransformOrigin="0.494,1.346" Click="btn_removeMod_Click"/>
@@ -52,6 +52,8 @@
             <CheckBox x:Name="chk_useMultiHome" Grid.Column="1" Content="" HorizontalAlignment="Left" Margin="10,134,0,0" VerticalContentAlignment="Center" Height="28" Click="chk_useMultiHome_Checked" VerticalAlignment="Top"/>
             <Label Content="Specify IP address" Margin="10,134,0,0" VerticalAlignment="Top" Height="26" HorizontalContentAlignment="Right"/>
             <TextBox x:Name="txt_multiHomeIPaddress" Grid.Column="1" IsEnabled="False" Margin="35,134,10,0" TextWrapping="Wrap" VerticalAlignment="Top" Height="26" VerticalContentAlignment="Center" FontSize="12" TextChanged="TextChanged" PreviewTextInput="txt_gamePort_PreviewTextInput"/>
+            <Label Content="Active Event" Margin="10,291,0,0" VerticalAlignment="Top" Height="26" HorizontalContentAlignment="Right"/>
+            <TextBox x:Name="txt_activeEvent" Grid.Column="1" Margin="10,291,10,0" TextWrapping="Wrap" VerticalAlignment="Top" Height="26" VerticalContentAlignment="Center" FontSize="12" TextChanged="TextChanged"/>
         </Grid>
     </Grid>
 </Window>

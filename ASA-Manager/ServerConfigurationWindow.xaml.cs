@@ -57,6 +57,7 @@ namespace ARKServerCreationTool
             chk_useMultiHome.IsChecked = targetServer.UseMultihome;
             txt_multiHomeIPaddress.IsEnabled = targetServer.UseMultihome;
             txt_multiHomeIPaddress.Text = targetServer.IPAddress.ToString();
+            txt_activeEvent.Text = targetServer.ActiveEvent;
 
             UpdateClusterCombo();
             UpdateMapCombo();
@@ -192,6 +193,7 @@ namespace ARKServerCreationTool
             serv.UseMultihome = chk_useMultiHome.IsChecked.Value;
             serv.IPAddress = txt_multiHomeIPaddress.Text.Trim();
             if (chkbx_overrideCommandline.IsChecked.Value) serv.customLaunchArgs = txt_commandLine.Text.Trim();
+            serv.ActiveEvent = txt_activeEvent.Text.Trim();
         }
 
         private void btn_newCluster_Click(object sender, RoutedEventArgs e)
