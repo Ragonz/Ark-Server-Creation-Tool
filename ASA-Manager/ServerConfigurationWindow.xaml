@@ -51,7 +51,7 @@
             <Label Content="No Battleye" Margin="10,258,0,0" VerticalAlignment="Top" Height="26" HorizontalContentAlignment="Right"/>
             <CheckBox x:Name="chk_useMultiHome" Grid.Column="1" Content="" HorizontalAlignment="Left" Margin="10,134,0,0" VerticalContentAlignment="Center" Height="28" Click="chk_useMultiHome_Checked" VerticalAlignment="Top"/>
             <Label Content="Specify IP address" Margin="10,134,0,0" VerticalAlignment="Top" Height="26" HorizontalContentAlignment="Right"/>
-            <TextBox x:Name="txt_multiHomeIPaddress" Grid.Column="1" IsEnabled="False" Margin="35,134,10,0" TextWrapping="Wrap" VerticalAlignment="Top" Height="26" VerticalContentAlignment="Center" FontSize="12" TextChanged="TextChanged" PreviewTextInput="txt_gamePort_PreviewTextInput"/>
+            <TextBox x:Name="txt_multiHomeIPaddress" Grid.Column="1" IsEnabled="False" Margin="35,134,10,0" TextWrapping="Wrap" VerticalAlignment="Top" Height="26" VerticalContentAlignment="Center" FontSize="12" TextChanged="TextChanged"/>
             <Label Content="Active Event" Margin="10,291,0,0" VerticalAlignment="Top" Height="26" HorizontalContentAlignment="Right"/>
             <TextBox x:Name="txt_activeEvent" Grid.Column="1" Margin="10,291,10,0" TextWrapping="Wrap" VerticalAlignment="Top" Height="26" VerticalContentAlignment="Center" FontSize="12" TextChanged="TextChanged"/>
         </Grid>
