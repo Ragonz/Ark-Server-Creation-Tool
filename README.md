@@ -50,3 +50,7 @@ The tool (Ark Survival Ascended Server Creation tool) will grab the ASA server f
 
 If the tool helped you and you want to help us fund its development, consider subscribing to our Patreon
 https://www.patreon.com/Ragonz
+
+People keep asking us if port forwarding is required, yes unless you want to only play on your server within your own home.
+If you cannot be bothered to port forward (or don't know how (there are many guides out there)) rent a vps as then you don't have to. No we don't have any reccomendations on what to use, however we have previously used https://pingperfect.com/ and it worked fine.
+If you do go the route of a VPS make sure it has a decent cpu speed and enough ram (approx 10GB per map)
