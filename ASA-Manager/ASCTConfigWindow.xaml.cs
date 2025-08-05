@@ -31,6 +31,7 @@ namespace ARKServerCreationTool
             txt_defaultPort.Text = ASCTGlobalConfig.Instance.StartingGamePort.ToString();
             txt_portIncrement.Text = ASCTGlobalConfig.Instance.PortIncrement.ToString();
             chk_autoFirewallRules.IsChecked = ASCTGlobalConfig.Instance.AutomaticallyCreateFirewallRule;
+            chk_AllowAutoLaunch.IsChecked = ASCTGlobalConfig.Instance.AllowAutomaticStart;
             txt_clusterDir.Text = ASCTGlobalConfig.Instance.GlobalClusterDir;
 
             this.firstLaunch = firstLaunch;
@@ -45,7 +46,7 @@ namespace ARKServerCreationTool
             ASCTGlobalConfig.Instance.PortIncrement = ushort.Parse(txt_portIncrement.Text.Trim());
             ASCTGlobalConfig.Instance.AutomaticallyCreateFirewallRule = chk_autoFirewallRules.IsChecked.Value;
             ASCTGlobalConfig.Instance.GlobalClusterDir = txt_clusterDir.Text;
-
+            ASCTGlobalConfig.Instance.AllowAutomaticStart = chk_AllowAutoLaunch.IsChecked.Value;
             ASCTGlobalConfig.Instance.Save();
 
             ASCTTools.FindOrCreateWindow<ServerList>();

@@ -54,6 +54,10 @@ namespace ARKServerCreationTool
 
         public bool AutomaticallyCreateFirewallRule { get; set; } = true;
 
+        public bool AllowAutomaticStart {  get; set; } = true;
+
+        public ushort AutoStartStaggerTime { get; set; } = 30;
+
         public ushort StartingGamePort { get; set; } = 7777;
         public ushort StartingRCONPort { get; set; } = 27015;
 
@@ -114,6 +118,8 @@ namespace ARKServerCreationTool
         public bool IsRunning => ProcessManager.IsRunning;
         [JsonIgnore]
         public string IsRunningToString => IsRunning ? "Running" : "Stopped";
+
+        public bool StartAutomatically { get; set; } = false;
 
         public int ID { get; private set; } //to be used as a primary key
         public string Name { get; set; } //friendly name for identifying the server to the user

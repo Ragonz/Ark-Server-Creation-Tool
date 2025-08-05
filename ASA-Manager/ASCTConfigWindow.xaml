@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:ARKServerCreationTool"
         mc:Ignorable="d"
-        Title="ASCT - Global Configuration" Height="237" Width="707" MinWidth="586"  MinHeight="237" MaxHeight="237"
+        Title="ASCT - Global Configuration" Height="283" Width="586" MinWidth="586"  MinHeight="237" 
         Closing="WindowClose">
     <Grid>
         <Label Content="ASCT Configuration" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="10,10,0,0" FontSize="16"/>
@@ -22,5 +22,6 @@
         <Label Content="Cluster Data Folder" HorizontalAlignment="Left" Margin="10,79,0,0" VerticalAlignment="Top"/>
         <TextBox x:Name="txt_clusterDir" Margin="126,79,113,0" VerticalAlignment="Top" Height="26" VerticalContentAlignment="Center"/>
         <Button x:Name="btn_clusterDirBrowse" Content="Browse" Margin="0,79,10,0" Height="26" VerticalAlignment="Top" Click="btn_clusterDirBrowse_Click" HorizontalAlignment="Right" Width="98"/>
+        <CheckBox x:Name="chk_AllowAutoLaunch" Content="Allow servers to be started automatically when ASCT is launched" HorizontalAlignment="Left" Margin="126,192,0,0" VerticalAlignment="Top"/>
     </Grid>
 </Window>

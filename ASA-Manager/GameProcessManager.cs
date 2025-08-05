@@ -34,7 +34,6 @@ namespace ARKServerCreationTool
                 managers.Add(targetServerID, new GameProcessManager(targetServerID));
             }
             return managers[targetServerID];
-
         }
 
         private Process gameProcess;

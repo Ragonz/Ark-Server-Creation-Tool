@@ -58,6 +58,8 @@ namespace ARKServerCreationTool
             txt_multiHomeIPaddress.IsEnabled = targetServer.UseMultihome;
             txt_multiHomeIPaddress.Text = targetServer.IPAddress.ToString();
             txt_activeEvent.Text = targetServer.ActiveEvent;
+            chk_automaticStart.IsChecked = targetServer.StartAutomatically;
+            lbl_allowAutoLaunchDisabled.Visibility = (chk_automaticStart.IsChecked.Value == true && ASCTGlobalConfig.Instance.AllowAutomaticStart == false) ? Visibility.Visible : Visibility.Collapsed;
 
             UpdateClusterCombo();
             UpdateMapCombo();
@@ -194,6 +196,7 @@ namespace ARKServerCreationTool
             serv.IPAddress = txt_multiHomeIPaddress.Text.Trim();
             if (chkbx_overrideCommandline.IsChecked.Value) serv.customLaunchArgs = txt_commandLine.Text.Trim();
             serv.ActiveEvent = txt_activeEvent.Text.Trim();
+            serv.StartAutomatically = chk_automaticStart.IsChecked.Value;
         }
 
         private void btn_newCluster_Click(object sender, RoutedEventArgs e)
@@ -222,7 +225,7 @@ namespace ARKServerCreationTool
 
                 UpdateServerObject(ref copyObject);
 
-                txt_commandLine.Text = copyObject.LaunchArguments; 
+                txt_commandLine.Text = copyObject.LaunchArguments;
             }
         }
 
@@ -320,6 +323,7 @@ namespace ARKServerCreationTool
         private void chk_crossplay_Checked(object sender, RoutedEventArgs e)
         {
             UpdateCommandLineBox();
+            lbl_allowAutoLaunchDisabled.Visibility = (chk_automaticStart.IsChecked.Value == true && ASCTGlobalConfig.Instance.AllowAutomaticStart == false) ? Visibility.Visible : Visibility.Collapsed;
         }
 
         private void chk_useMultiHome_Checked(object sender, RoutedEventArgs e)

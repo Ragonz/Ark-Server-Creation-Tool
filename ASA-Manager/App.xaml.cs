@@ -49,6 +49,14 @@ namespace ARKServerCreationTool
                 ServerList list = new ServerList();
 
                 list.Show();
+
+                if (ASCTGlobalConfig.Instance.AllowAutomaticStart)
+                {
+                    foreach (ASCTServerConfig server in ASCTGlobalConfig.Instance.Servers.Where(s => s.StartAutomatically))
+                    {
+                        server.ProcessManager.Start();
+                    }
+                }
             }
         }
     }
