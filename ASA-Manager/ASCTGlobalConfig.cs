@@ -46,7 +46,7 @@ namespace ARKServerCreationTool
         [JsonIgnore]
         public static readonly string[] maps = new string[]
         {
-            "TheIsland_WP", "ScorchedEarth_WP", "thecenter_wp", "Aberration_WP", "Extinction_WP", "Astraeos_WP", "Ragnarok_WP"
+            "TheIsland_WP", "ScorchedEarth_WP", "thecenter_wp", "Aberration_WP", "Extinction_WP", "Astraeos_WP", "Ragnarok_WP", "Valguero_WP"
         };
 
         public string ServersInstallationPath { get; set; } = Path.Combine(Directory.GetCurrentDirectory(), "InstalledServers");
