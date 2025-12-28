@@ -23,5 +23,6 @@
         <TextBox x:Name="txt_clusterDir" Margin="126,79,113,0" VerticalAlignment="Top" Height="26" VerticalContentAlignment="Center"/>
         <Button x:Name="btn_clusterDirBrowse" Content="Browse" Margin="0,79,10,0" Height="26" VerticalAlignment="Top" Click="btn_clusterDirBrowse_Click" HorizontalAlignment="Right" Width="98"/>
         <CheckBox x:Name="chk_AllowAutoLaunch" Content="Allow servers to be started automatically when ASCT is launched" HorizontalAlignment="Left" Margin="126,192,0,0" VerticalAlignment="Top"/>
+        <CheckBox x:Name="chk_PromptStartAllServers" Content="Prompt start all servers in cluster" HorizontalAlignment="Left" Margin="126,212,0,0" VerticalAlignment="Top"/>
     </Grid>
 </Window>
