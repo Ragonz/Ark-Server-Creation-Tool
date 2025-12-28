@@ -23,6 +23,7 @@ namespace ARKServerCreationTool
     public partial class ASCTConfigWindow : Window
     {
         private bool firstLaunch = false;
+
         public ASCTConfigWindow(bool firstLaunch = false)
         {
             InitializeComponent();
@@ -32,12 +33,15 @@ namespace ARKServerCreationTool
             txt_portIncrement.Text = ASCTGlobalConfig.Instance.PortIncrement.ToString();
             chk_autoFirewallRules.IsChecked = ASCTGlobalConfig.Instance.AutomaticallyCreateFirewallRule;
             chk_AllowAutoLaunch.IsChecked = ASCTGlobalConfig.Instance.AllowAutomaticStart;
+            chk_PromptStartAllServers.IsChecked = ASCTGlobalConfig.Instance.PromptStartAllServersInCluster;
             txt_clusterDir.Text = ASCTGlobalConfig.Instance.GlobalClusterDir;
 
             this.firstLaunch = firstLaunch;
         }
 
-        public ASCTConfigWindow() : this(false) { }
+        public ASCTConfigWindow() : this(false)
+        {
+        }
 
         private void btn_saveConfig_Click(object sender, RoutedEventArgs e)
         {
@@ -47,6 +51,7 @@ namespace ARKServerCreationTool
             ASCTGlobalConfig.Instance.AutomaticallyCreateFirewallRule = chk_autoFirewallRules.IsChecked.Value;
             ASCTGlobalConfig.Instance.GlobalClusterDir = txt_clusterDir.Text;
             ASCTGlobalConfig.Instance.AllowAutomaticStart = chk_AllowAutoLaunch.IsChecked.Value;
+            ASCTGlobalConfig.Instance.PromptStartAllServersInCluster = chk_PromptStartAllServers.IsChecked.Value;
             ASCTGlobalConfig.Instance.Save();
 
             ASCTTools.FindOrCreateWindow<ServerList>();
@@ -67,7 +72,9 @@ namespace ARKServerCreationTool
         {
             if (firstLaunch)
             {
-                System.Windows.Forms.DialogResult result = MessageBox.Show("Are you sure you wish to exit, no config has been created?", "Are you sure?", System.Windows.Forms.MessageBoxButtons.YesNo);
+                System.Windows.Forms.DialogResult result = MessageBox.Show(
+                    "Are you sure you wish to exit, no config has been created?", "Are you sure?",
+                    System.Windows.Forms.MessageBoxButtons.YesNo);
 
                 if (result == System.Windows.Forms.DialogResult.Yes)
                 {
@@ -99,8 +106,8 @@ namespace ARKServerCreationTool
         private void NumberValidationTextBox(object sender, TextCompositionEventArgs e)
         {
             Regex regex = new Regex("[0-9]+");
-           
-           e.Handled = !regex.IsMatch(e.Text);
+
+            e.Handled = !regex.IsMatch(e.Text);
         }
 
         private void btn_clusterDirBrowse_Click(object sender, RoutedEventArgs e)

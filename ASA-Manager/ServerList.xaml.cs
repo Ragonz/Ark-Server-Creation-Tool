@@ -188,7 +188,12 @@ namespace ARKServerCreationTool
 
             if (selectedServer.ClusterKey != string.Empty && cluster.Count() > 1)
             {
-                MessageBoxResult result = System.Windows.MessageBox.Show("Would you like to perform this action on all of the servers in the same cluster?", "", MessageBoxButton.YesNo);
+                MessageBoxResult result = MessageBoxResult.No;
+
+                if (config.PromptStartAllServersInCluster)
+                {
+                    result = System.Windows.MessageBox.Show("Would you like to perform this action on all of the servers in the same cluster?", "", MessageBoxButton.YesNo);
+                }
 
                 if (result == MessageBoxResult.Yes)
                 {

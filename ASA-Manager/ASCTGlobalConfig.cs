@@ -7,8 +7,7 @@ namespace ARKServerCreationTool
 {
     public class ASCTGlobalConfig
     {
-        [JsonIgnore]
-        public static ASCTGlobalConfig _instance = null;
+        [JsonIgnore] public static ASCTGlobalConfig _instance = null;
 
         [JsonIgnore]
         public static ASCTGlobalConfig Instance
@@ -30,31 +29,33 @@ namespace ARKServerCreationTool
             }
         }
 
-        [JsonIgnore]
-        public const string configName = "ASCTGlobalConfig.json";
+        [JsonIgnore] public const string configName = "ASCTGlobalConfig.json";
 
-        [JsonIgnore]
-        public const string relativeEXEPath = @"ShooterGame\Binaries\Win64\ArkAscendedServer.exe";
-        [JsonIgnore]
-        public string depotDownloaderFolder = "depotdownloader";
-        [JsonIgnore]
-        public string depotDownloaderURL = @"https://github.com/SteamRE/DepotDownloader/releases/latest/download/DepotDownloader-framework.zip";
-        [JsonIgnore]
-        public string depotDownloaderExe = "DepotDownloader.exe";
-        [JsonIgnore]
-        public ulong serverAppID = 2430930;
-        [JsonIgnore]
-        public static readonly string[] maps = new string[]
+        [JsonIgnore] public const string relativeEXEPath = @"ShooterGame\Binaries\Win64\ArkAscendedServer.exe";
+        [JsonIgnore] public string depotDownloaderFolder = "depotdownloader";
+
+        [JsonIgnore] public string depotDownloaderURL =
+            @"https://github.com/SteamRE/DepotDownloader/releases/latest/download/DepotDownloader-framework.zip";
+
+        [JsonIgnore] public string depotDownloaderExe = "DepotDownloader.exe";
+        [JsonIgnore] public ulong serverAppID = 2430930;
+
+        [JsonIgnore] public static readonly string[] maps = new string[]
         {
-            "TheIsland_WP", "ScorchedEarth_WP", "thecenter_wp", "Aberration_WP", "Extinction_WP", "Astraeos_WP", "Ragnarok_WP", "Valguero_WP", "LostColony_WP"
+            "TheIsland_WP", "ScorchedEarth_WP", "thecenter_wp", "Aberration_WP", "Extinction_WP", "Astraeos_WP",
+            "Ragnarok_WP", "Valguero_WP", "LostColony_WP"
         };
 
-        public string ServersInstallationPath { get; set; } = Path.Combine(Directory.GetCurrentDirectory(), "InstalledServers");
-        public string GlobalClusterDir { get; set; } = Path.Combine(Directory.GetCurrentDirectory(), "InstalledServers", "ClusterData");
+        public string ServersInstallationPath { get; set; } =
+            Path.Combine(Directory.GetCurrentDirectory(), "InstalledServers");
+
+        public string GlobalClusterDir { get; set; } =
+            Path.Combine(Directory.GetCurrentDirectory(), "InstalledServers", "ClusterData");
 
         public bool AutomaticallyCreateFirewallRule { get; set; } = true;
 
-        public bool AllowAutomaticStart {  get; set; } = true;
+        public bool AllowAutomaticStart { get; set; } = true;
+        public bool PromptStartAllServersInCluster { get; set; } = true;
 
         public ushort AutoStartStaggerTime { get; set; } = 30;
 
@@ -69,7 +70,8 @@ namespace ARKServerCreationTool
 
         public ushort NextAvailablePort()
         {
-            return (ushort)(Servers.Select(s => s.GamePort).DefaultIfEmpty((ushort)(StartingGamePort - PortIncrement)).Max() + PortIncrement);
+            return (ushort)(Servers.Select(s => s.GamePort).DefaultIfEmpty((ushort)(StartingGamePort - PortIncrement))
+                .Max() + PortIncrement);
         }
 
         public int NextAvailableID()
@@ -111,13 +113,10 @@ namespace ARKServerCreationTool
             this.GameDirectory = $"ASA Server {ID}";
             this.GamePort = GamePort;
         }
-        
-        [JsonIgnore]
-        internal GameProcessManager ProcessManager => GameProcessManager.GetGameProcessManager(this.ID);
-        [JsonIgnore]
-        public bool IsRunning => ProcessManager.IsRunning;
-        [JsonIgnore]
-        public string IsRunningToString => IsRunning ? "Running" : "Stopped";
+
+        [JsonIgnore] internal GameProcessManager ProcessManager => GameProcessManager.GetGameProcessManager(this.ID);
+        [JsonIgnore] public bool IsRunning => ProcessManager.IsRunning;
+        [JsonIgnore] public string IsRunningToString => IsRunning ? "Running" : "Stopped";
 
         public bool StartAutomatically { get; set; } = false;
 
@@ -127,10 +126,16 @@ namespace ARKServerCreationTool
         public string ClusterKey { get; set; } = string.Empty; //The cluster targetServerID 
 
         public string GameDirectory { get; set; } //Path to where the server is located
-        [JsonIgnore]
-        public string EXEPath { get { return Path.Combine(GameDirectory, ASCTGlobalConfig.relativeEXEPath); } }
 
-        public bool UseMultihome { get; set; } = false; //Whether the server should be launched with the MultihomeArgs argument
+        [JsonIgnore]
+        public string EXEPath
+        {
+            get { return Path.Combine(GameDirectory, ASCTGlobalConfig.relativeEXEPath); }
+        }
+
+        public bool UseMultihome { get; set; } =
+            false; //Whether the server should be launched with the MultihomeArgs argument
+
         public string IPAddress { get; set; } = string.Empty; //The IP address to pass to multihome
         public ushort GamePort { get; set; } //main gameport
 
@@ -145,7 +150,7 @@ namespace ARKServerCreationTool
 
         public bool AllowCrossplay { get; set; } = false;
 
-        public string ActiveEvent {  get; set; } = string.Empty;
+        public string ActiveEvent { get; set; } = string.Empty;
 
         public HashSet<ulong> modIDs = new HashSet<ulong>();
 
@@ -160,7 +165,9 @@ namespace ARKServerCreationTool
                 }
                 else
                 {
-                    return $"\"{Map}{MultihomeArgs}\" \"-port={GamePort}\" -WinLiveMaxPlayers={Slots}{ModArgs}{ClusterArgs}{CrossplayArgs}{NoBattleyeArgs}{ActiveEventArgs} -log -servergamelog".Trim();
+                    return
+                        $"\"{Map}{MultihomeArgs}\" \"-port={GamePort}\" -WinLiveMaxPlayers={Slots}{ModArgs}{ClusterArgs}{CrossplayArgs}{NoBattleyeArgs}{ActiveEventArgs} -log -servergamelog"
+                            .Trim();
                 }
             }
         }
@@ -168,10 +175,7 @@ namespace ARKServerCreationTool
         [JsonIgnore]
         public string NoBattleyeArgs
         {
-            get
-            {
-                return NoBattleye ? " -NoBattlEye" : string.Empty;
-            }
+            get { return NoBattleye ? " -NoBattlEye" : string.Empty; }
         }
 
         [JsonIgnore]
@@ -198,7 +202,8 @@ namespace ARKServerCreationTool
                     return string.Empty;
                 }
 
-                return $" \"-clusterid={ClusterKey}\" \"-ClusterDirOverride={ASCTGlobalConfig.Instance.GlobalClusterDir}\"";
+                return
+                    $" \"-clusterid={ClusterKey}\" \"-ClusterDirOverride={ASCTGlobalConfig.Instance.GlobalClusterDir}\"";
             }
         }
 
@@ -222,18 +227,13 @@ namespace ARKServerCreationTool
         [JsonIgnore]
         public string CrossplayArgs
         {
-            get
-            {
-                return AllowCrossplay ? " -ServerPlatform=ALL" : string.Empty;
-            }
+            get { return AllowCrossplay ? " -ServerPlatform=ALL" : string.Empty; }
         }
+
         [JsonIgnore]
         public string ActiveEventArgs
         {
-            get
-            {
-                return !string.IsNullOrEmpty(ActiveEvent) ? $" -ActiveEvent={ActiveEvent}" : string.Empty;
-            }
+            get { return !string.IsNullOrEmpty(ActiveEvent) ? $" -ActiveEvent={ActiveEvent}" : string.Empty; }
         }
     }
 }
