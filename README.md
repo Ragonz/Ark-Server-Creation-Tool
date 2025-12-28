@@ -8,7 +8,7 @@ This tool will automate the downloading, installation and setup of your very own
 The tool right now is a very barebones application but is getting updated constantly to improve it
 
 Requirements:
- - .NET 9
+ - .NET 10
 
 # Instructions on using this tool
 
@@ -54,3 +54,7 @@ https://www.patreon.com/Ragonz
 People keep asking us if port forwarding is required, yes unless you want to only play on your server within your own home.
 If you cannot be bothered to port forward (or don't know how (there are many guides out there)) rent a vps as then you don't have to. No we don't have any reccomendations on what to use, however we have previously used https://pingperfect.com/ and it worked fine.
 If you do go the route of a VPS make sure it has a decent cpu speed and enough ram (approx 10GB per map)
+
+# Contributing
+
+Just a small note about running the project, this tool requires admin permissions so you may need to run your IDE as an administrator to run the project correctly.
