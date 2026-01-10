@@ -43,7 +43,7 @@
             <Button x:Name="btn_browse" Grid.Column="1" Grid.Row="2" Content="Browse..." Margin="0,0,10,0" VerticalAlignment="Top" HorizontalAlignment="Right" Width="71" Height="26" Click="btn_browse_Click"/>
             <Label Content="Map" Margin="10,0,0,5" VerticalAlignment="Top" Height="26" HorizontalContentAlignment="Right" Grid.Row="3"/>
             <Button x:Name="btn_newMap" Grid.Column="1" Grid.Row="3" Content="New Map..." Margin="0,0,10,0" VerticalAlignment="Top" HorizontalAlignment="Right" Width="104" Height="26" Click="btn_newMap_Click"/>
-            <TextBox x:Name="txt_customMap" Grid.Column="1" Grid.Row="3" Margin="10,0,0,5" TextWrapping="Wrap"  VerticalAlignment="Top" Height="26" Visibility="Collapsed"  VerticalContentAlignment="Center" FontSize="12" TextChanged="TextChanged"/>
+            <TextBox x:Name="txt_customMap" Grid.Column="1" Grid.Row="3" Margin="10,0,119,0" TextWrapping="Wrap"  VerticalAlignment="Top" Height="26" Visibility="Collapsed"  VerticalContentAlignment="Center" FontSize="12" TextChanged="TextChanged"/>
             <ComboBox x:Name="cmbo_Map" Grid.Column="1" Grid.Row="3" Margin="10,0,119,0" VerticalAlignment="Top" Height="26" VerticalContentAlignment="Center" SelectionChanged="comboSelectionChanged"/>
             <Label Content="Cluster ID" Margin="10,0,0,5" VerticalAlignment="Top" Height="26" HorizontalContentAlignment="Right" Grid.Row="4"/>
             <ComboBox x:Name="cmbo_clusterKey" Grid.Column="1" Grid.Row="4" Margin="10,0,119,0" VerticalAlignment="Top" Height="26" SelectionChanged="comboSelectionChanged"/>
