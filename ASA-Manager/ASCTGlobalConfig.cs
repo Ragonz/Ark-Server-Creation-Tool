@@ -153,6 +153,7 @@ namespace ARKServerCreationTool
         public string ActiveEvent { get; set; } = string.Empty;
 
         public HashSet<ulong> modIDs = new HashSet<ulong>();
+        public HashSet<string> userLaunchArguments = new HashSet<string>();
 
         [JsonIgnore]
         public string LaunchArguments
@@ -166,7 +167,7 @@ namespace ARKServerCreationTool
                 else
                 {
                     return
-                        $"\"{Map}{MultihomeArgs}\" \"-port={GamePort}\" -WinLiveMaxPlayers={Slots}{ModArgs}{ClusterArgs}{CrossplayArgs}{NoBattleyeArgs}{ActiveEventArgs} -log -servergamelog"
+                        $"\"{Map}{MultihomeArgs}\" \"-port={GamePort}\" -WinLiveMaxPlayers={Slots}{ModArgs}{ClusterArgs}{CrossplayArgs}{NoBattleyeArgs}{ActiveEventArgs}{userlaunchargs} -log -servergamelog"
                             .Trim();
                 }
             }
@@ -176,6 +177,19 @@ namespace ARKServerCreationTool
         public string NoBattleyeArgs
         {
             get { return NoBattleye ? " -NoBattlEye" : string.Empty; }
+        }
+        [JsonIgnore]
+        public string userlaunchargs
+        {
+            get
+            {
+                if (userLaunchArguments.Count <= 0)
+                {
+                    return string.Empty;
+                }
+
+                return $" {string.Join(" ", userLaunchArguments)}";
+        }
         }
 
         [JsonIgnore]
